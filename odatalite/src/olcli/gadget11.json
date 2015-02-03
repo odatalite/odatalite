@@ -1,0 +1,9 @@
+{
+  "@odata.context": "odata/$metadata#Gadgets/$entity",
+  "Id": 21,
+  "Color": "Blue",
+  "Model": "M3303",
+  "WeigthInGrams": 765,
+  "ManufacturingDate": "2014-12-01",
+  "SerialNumber": 344574157
+}

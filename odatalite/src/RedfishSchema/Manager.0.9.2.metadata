@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OData"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/DMTFExtensions">
+    <edmx:Include Namespace="DMTFExtensions.0.9.2" Alias="DMTF"/>
+    <edmx:Include Namespace="Validation.0.9.2" Alias="Validation"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Resource">
+    <edmx:Include Namespace="Resource.0.9.2" Alias="Resource"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/ComputerSystem">
+    <edmx:Include Namespace="ComputerSystem.0.9.2" Alias="ComputerSystem"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Chassis">
+    <edmx:Include Namespace="Chassis.0.9.2" Alias="Chassis"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/EthernetNetworkInterface">
+    <edmx:Include Namespace="EthernetNetworkInterface.0.9.2" Alias="EthernetNetworkInterface"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/ManagerNetworkService">
+    <edmx:Include Namespace="NetworkService.0.9.2" Alias="NetworkService"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/LogService">
+    <edmx:Include Namespace="LogService.0.9.2" Alias="LogService"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/VirtualMedia">
+    <edmx:Include Namespace="VirtualMedia.0.9.2" Alias="VirtualMedia"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/SerialInterface">
+    <edmx:Include Namespace="SerialInterface.0.9.2" Alias="SerialInterface"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Firmware">
+    <edmx:Include Namespace="Firmware.0.9.2" Alias="Firmware"/>
+  </edmx:Reference>
+
+  <edmx:DataServices>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Manager.0.9.2" Alias="Manager">
+
+      <!-- This is the schema definition for a Manager and its respective properties -->
+      <EntityType Name="Manager" BaseType="Resource.Resource">
+        <Annotation Term="OData.Description" String="This is the schema definition for a Manager.  Examples of managers are BMCs, Enclosure Managers, Management Controllers and other subsystems assigned managability functions."/>
+        <Annotation Term="OData.LongDescription" String="This resource shall be used to represent a management subsystem for an SPMA implementation."/>
+        <Property Name="ManagerType" Type="Manager.ManagerType" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This property represents the type of manager that this resource represents."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall describe the function of this manager.  The value EnclosureManager shall be used if this manager controls one or more services through aggregation.  The value BMC shall be used if this manager represents a traditional server management controller. The value ManagementController shall be used if none of the other enumerations apply."/>
+        </Property>
+        <Property Name="Links" Type="Manager.Links" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This object contains the links to other resources that are related to this resource."/>
+        </Property>
+        <Property Name="UUID" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The Universal Unique Identifier (UUID) for this Manager"/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the universal unique identifier number for the manager."/>
+        </Property>
+        <Property Name="Model" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The model information of this Manager as defined by the manufacturer"/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the information about how the manufacturer references this manager."/>
+        </Property>
+        <Property Name="Firmware" Type="Firmware.FirmwareRevision" Nullable="false"/>
+        <Property Name="SerialConsole" Type="Manager.SerialConsole" Nullable="false">
+          <Annotation Term="OData.Description" String="The value of this property shall contain the information about the Serial Console service of this manager."/>
+        </Property>
+        <Property Name="CommandShell" Type="Manager.CommandShell">
+          <Annotation Term="OData.Description" String="The value of this property shall contain the information about the Command Shell service of this manager."/>
+        </Property>
+        <Property Name="GraphicalConsole" Type="Manager.GraphicalConsole">
+          <Annotation Term="OData.Description" String="The value of this property shall contain the information about the Graphical Console (KVM-IP) service of this manager."/>
+        </Property>
+        <Property Name="Redundancy" Type="Redundancy.Redundancy" Nullable="false"/>
+        <Property Name="Actions" Type="Manager.Actions" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The Actions object contains the available custom actions on this resource."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="Actions">
+        <Property Name="Oem" Type="Manager.OemActions" Nullable="false"/>
+      </ComplexType>
+      <ComplexType Name="OemActions"/>
+
+      <ComplexType Name="Links">
+        <NavigationProperty Name="ManagerForServers" Type="Collection(ComputerSystem.ComputerSystem)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This property is an array of references to the systems that this manager has control over."/>
+          <Annotation Term="OData.LongDescription" String="This is a reference to a collection of ComputerSystem resources."/>
+          <Annotation Term="DMTF.ExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="ManagerForChassis" Type="Collection(Chassis.Chassis)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This property is an array of references to the chasis that this manager has control over."/>
+          <Annotation Term="OData.LongDescription" String="This is a reference to a collection of ListenerDestination resources."/>
+          <Annotation Term="DMTF.ExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="EthernetNICs" Type="Collection(EthernetNetworkInterface.EthernetNetworkInterface)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is a reference to a collection of NICs that this manager uses for network communication.  It is here that clients will find NIC configuration options and settings."/>
+          <Annotation Term="OData.LongDescription" String="This is a reference to a collection of ListenerDestination resources."/>
+        </NavigationProperty>
+        <NavigationProperty Name="SerialInterfaces" Type="Collection(SerialInterface.SerialInterface)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is a reference to a collection of serial interfaces that this manager uses for serial and console communication.  It is here that clients will find serial configuration options and settings."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a link to a collection of SerialInterfaces which are for the use of this manager."/>
+        </NavigationProperty>
+        <NavigationProperty Name="NetworkService" Type="NetworkService.ManagerNetworkService">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is a reference to the network services and their settings that the manager controls.  It is here that clients will find network configuration options as well as network services."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain a reference to a resource of type ManagerNetworkService which represents the network services for this manager."/>
+          <Annotation Term="DMTF.ExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="Logs" Type="Collection(LogService.LogService)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is a reference to a collection of Logs used by the manager."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain a reference to a collection of LogService which are for the use of this manager."/>
+        </NavigationProperty>
+        <NavigationProperty Name="VirtualMedia" Type="Collection(VirtualMedia.VirtualMedia)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is a reference to the virtual media services for this particular manager."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain a reference to a collection of VirtualMedia which are for the use of this manager."/>
+        </NavigationProperty>
+        <Property Name="Oem" Type="Resource.Oem"/>
+      </ComplexType>
+
+      <!-- The reset action resets/reboots the manager.-->
+      <Action Name="Reset" Isbound="true">
+        <Annotation Term="OData.Description" String="The reset action resets/reboots the manager."/>
+        <Annotation Term="OData.LongDescription" String="This defines the name of the custom action supported when used in conjunction with a POST operation to this resource. When issued, this operation will perform a reset of the manager."/>
+        <Parameter Name="Manager" Type="Manager.Actions"/>
+      </Action>
+
+      <!-- The ForceFailover action forces a failover of this manager to the manager used in the href below.-->
+      <Action Name="ForceFailover" Isbound="true">
+        <Annotation Term="OData.Description" String="The ForceFailover action forces a failover of this manager to the manager used in the parameter"/>
+        <Annotation Term="OData.LongDescription" String="This defines the name of the custom action supported when used in conjunction with a POST operation to this resource. When issued, this operation will perform a forced failover of the manager's redundancy to the manager supplied as a parameter."/>
+        <Parameter Name="Manager" Type="Manager.Actions"/>
+        <Parameter Name="href" Type="Collection(Resource.Resource)" Nullable="false">
+          <Annotation Term="OData.Description" String="This array defines the supported values for this property on this resource.  In this case, a valid reference is supported."/>
+        </Parameter>
+      </Action>
+
+      <!-- The ModifyRedundancySet operation is used to add or remove members to a redundant group of manager.-->
+      <Action Name="ModifyRedundancySet" Isbound="true">
+        <Annotation Term="OData.Description" String="The ModifyRedundancySet operation is used to add or remove members to a redundant group of manager."/>
+        <Annotation Term="OData.LongDescription" String="This defines the name of the custom action for which the following properties are supported on this resource.  The ModifyRedundancySet operation shall be used to add or remove members to a redundant group of manager."/>
+        <Parameter Name="Manager" Type="Manager.Actions"/>
+        <Parameter Name="Add" Type="Collection(Resource.Resource)" Nullable="false">
+          <Annotation Term="OData.Description" String="This array defines the supported values for this property on this resource.  In this case, a valid reference is supported. Add shall be used to Add members to the manager redundancy group."/>
+        </Parameter>
+        <Parameter Name="Remove" Type="Collection(Resource.Resource)" Nullable="false">
+          <Annotation Term="OData.Description" String="This array defines the supported values for this property on this resource.  In this case, a valid reference is supported. Remove shall be used to remove members from the manager redundancy group."/>
+        </Parameter>
+      </Action>
+
+      <!-- This type defines the type of manager that given resource represents. -->
+      <EnumType Name="ManagerType">
+        <Member Name="ManagementController">
+          <Annotation Term="OData.Description" String="A controller used primarily to monitor or manage the operation of a device or system"/>
+        </Member>
+        <Member Name="EnclosureManager">
+          <Annotation Term="OData.Description" String="A controller which provides management functions for a chassis or group of devices or systems"/>
+        </Member>
+        <Member Name="BMC">
+          <Annotation Term="OData.Description" String="A controller which provides management functions for a single computer system"/>
+        </Member>
+      </EnumType>
+
+      <ComplexType Name="ManagerService">
+        <Annotation Term="OData.Description" String="Used for describing services like Serial Console, Command Shell or Graphical Console"/>
+        <Property Name="Enabled" Type="Edm.Boolean" Nullable="false">
+          <Annotation Term="OData.Description" String="Indicates if the service is enabled for this manager."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the enabled status of the protocol used for the service.  The value shall be true if enabled and false if disabled."/>
+        </Property>
+        <Property Name="MaxConcurrentSessions" Type="Edm.Int64" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="Indicates the maximum number of service sessions, regardless of protocol, this manager is able to support."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the maximum number of concurrent service sessions supported by the implementation."/>
+          <Annotation Term="Validation.Minimum" Int="0"/>
+        </Property>
+      </ComplexType>
+
+      <!-- This schema defines Serial Console connection types allowed by the implementation. -->
+      <EnumType Name="SerialConnectTypesSupported">
+        <Member Name="SSH">
+          <Annotation Term="OData.Description" String="The controller supports a Serial Console connection using the SSH protocol"/>
+        </Member>
+        <Member Name="Telnet">
+          <Annotation Term="OData.Description" String="The controller supports a Serial Console connection using the Telnet protocol"/>
+        </Member>
+        <Member Name="IPMI">
+          <Annotation Term="OData.Description" String="The controller supports a Serial Console connection using the IPMI Serial-over-LAN (SOL) protocol"/>
+        </Member>
+        <Member Name="Oem">
+          <Annotation Term="OData.Description" String="The controller supports a Serial Console connection using an OEM-specific protocol"/>
+        </Member>
+      </EnumType>
+
+      <!-- Need other enumerations because enumeration descriptions differ by type -->
+      <EnumType Name="CommandConnectTypesSupported">
+        <Member Name="SSH">
+          <Annotation Term="OData.Description" String="The controller supports a Command Shell connection using the SSH protocol"/>
+        </Member>
+        <Member Name="Telnet">
+          <Annotation Term="OData.Description" String="The controller supports a Command Shell connection using the SSH protocol"/>
+        </Member>
+        <Member Name="IPMI">
+          <Annotation Term="OData.Description" String="The controller supports a Command Shell connection using the SSH protocol"/>
+        </Member>
+        <Member Name="Oem">
+          <Annotation Term="OData.Description" String="The controller supports a Command Shell connection using an OEM-specific protocol"/>
+        </Member>
+      </EnumType>
+
+      <EnumType Name="GraphicalConnectTypesSupported">
+        <Member Name="KVMIP">
+          <Annotation Term="OData.Description" String="The controller supports a Graphical Console connection using a KVM-IP (redirection of Keyboard, Video, Mouse over IP) protocol"/>
+        </Member>
+        <Member Name="Oem">
+          <Annotation Term="OData.Description" String="The controller supports a Graphical Console connection using an OEM-specific protocol"/>
+        </Member>
+      </EnumType>
+
+      <!-- This type contains information about the Serial Console service of a given manager. -->
+      <ComplexType Name="SerialConsole" BaseType="Manager.ManagerService">
+        <Property Name="ConnectTypesSupported" Type="Collection(Manager.SerialConnectTypesSupported)" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This object is used to enumerate the Serial Console connection types allowed by the implementation."/>
+          <Annotation Term="OData.LongDescription" String="The value of ConnectTypesSupported shall be an array of the enumerations provided here.  SSH shall be included if the Secure Shell (SSH) protocol is supported.  Telnet shall be included if the Telnet protocol is supported.  IPMI shall be included if the IPMI (Serial-over-LAN) protocol is supported."/>
+        </Property>
+      </ComplexType>
+
+      <!-- This type contains information about the Command Shell service of a given manager. -->
+      <ComplexType Name="CommandShell" BaseType="Manager.ManagerService">
+        <Property Name="ConnectTypesSupported" Type="Collection(Manager.CommandConnectTypesSupported)" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This object is used to enumerate the Command Shell connection types allowed by the implementation."/>
+          <Annotation Term="OData.LongDescription" String="The value of ConnectTypesSupported shall be an array of the enumerations provided here.  SSH shall be included if the Secure Shell (SSH) protocol is supported.  Telnet shall be included if the Telnet protocol is supported.  IPMI shall be included if the IPMI (Serial-over-LAN) protocol is supported."/>
+        </Property>
+      </ComplexType>
+
+      <!-- This type contains information about the Graphical Console (KVM-IP) service of a given manager. -->
+      <ComplexType Name="GraphicalConsole" BaseType="Manager.ManagerService">
+        <Property Name="ConnectTypesSupported" Type="Collection(Manager.GraphicalConnectTypesSupported)" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This object is used to enumerate the Graphical Console connection types allowed by the implementation."/>
+          <Annotation Term="OData.LongDescription" String="The value of ConnectTypesSupported shall be an array of the enumerations provided here.  RDP shall be included if the Remote Desktop (RDP) protocol is supported.  KVMIP shall be included if a vendor-define KVM-IP protocol is supported."/>
+        </Property>
+      </ComplexType>
+
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

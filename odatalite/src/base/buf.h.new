@@ -1,0 +1,195 @@
+#ifndef _buf_h
+#define _buf_h
+
+#include <stdarg.h>
+#include "common.h"
+#include "alloc.h"
+
+#define BUF_INITIALIZER { NULL, NULL, 0, 0 }
+
+typedef struct _Buf
+{
+    Alloc* alloc;
+    char* data;
+    size_t size;
+    size_t capacity;
+}
+Buf;
+
+void BufInit(
+    Buf* self,
+    Alloc* alloc);
+
+void BufDestroy(
+    Buf* self);
+
+INLINE void BufClear(
+    Buf* self)
+{
+    self->size = 0;
+}
+
+int __BufReserve(
+    Buf* self,
+    size_t capacity);
+
+ALWAYS_INLINE int BufReserve(
+    Buf* self,
+    size_t capacity)
+{
+    if (capacity <= self->capacity)
+        return 0;
+
+    return __BufReserve(self, capacity);
+}
+
+ALWAYS_INLINE int BufCat(
+    Buf* self,
+    const char* data,
+    size_t size)
+{
+    /*HOTSOPT*/
+    size_t n = self->size + size;
+
+    if (n > self->capacity)
+    {
+        if (__BufReserve(self, n) != 0)
+            return -1;
+    }
+
+    memcpy(self->data + self->size, data, size);
+    self->size = n;
+    return 0;
+}
+
+INLINE int BufCatStr(
+    Buf* self,
+    const char* data)
+{
+    return BufCat(self, data, strlen(data));
+}
+
+ALWAYS_INLINE int BufCatQuotedString(
+    Buf* self,
+    const char* str,
+    size_t len)
+{
+    size_t n = self->size + len + 2;
+
+    if (n > self->capacity)
+    {
+        if (__BufReserve(self, n) != 0)
+            return -1;
+    }
+
+    self->data[self->size] = '"';
+    memcpy(self->data + self->size + 1, str, len);
+    self->data[self->size + 1 + len] = '"';
+    self->size = n;
+    return 0;
+}
+
+ALWAYS_INLINE int BufCat1(
+    Buf* self,
+    char c)
+{
+    if (self->size != self->capacity)
+    {
+        self->data[self->size++] = c;
+        return 0;
+    }
+
+    return BufCat(self, &c, 1);
+}
+
+int __BufCat2(
+    Buf* self,
+    char c1,
+    char c2);
+
+ALWAYS_INLINE int BufCat2(
+    Buf* self,
+    char c1,
+    char c2)
+{
+    if (self->size + 2 <= self->capacity)
+    {
+        self->data[self->size++] = c1;
+        self->data[self->size++] = c2;
+        return 0;
+    }
+    return __BufCat2(self, c1, c2);
+}
+
+ALWAYS_INLINE int BufSet(
+    Buf* self,
+    char c,
+    size_t size)
+{
+    /*HOTSOPT*/
+    size_t n = self->size + size;
+
+    if (n > self->capacity)
+    {
+        if (__BufReserve(self, n) != 0)
+            return -1;
+    }
+
+    memset(self->data + self->size, c, size);
+    self->size = n;
+    return 0;
+}
+
+INLINE void BufRemove(
+    Buf* self,
+    size_t offset,
+    size_t size)
+{
+    size_t rem;
+
+    DEBUG_ASSERT(offset + size <= self->size);
+
+    if ((rem = self->size - (offset + size)))
+    {
+        memmove(self->data + offset, self->data + offset + size, rem);
+    }
+
+    self->size -= size;
+}
+
+int BufFmtV(Buf* self, const char* format, va_list ap);
+
+PRINTF_FORMAT(2, 3)
+INLINE int BufFmt(Buf* self, const char* format, ...)
+{
+    va_list ap;
+    int r;
+
+    va_start(ap, format);
+    r = BufFmtV(self, format, ap);
+    va_end(ap);
+
+    return r;
+}
+
+int BufCatV(Buf* self, ...);
+
+/* Zero-terminate this buffer without increasing its size */
+INLINE int BufZeroTerminate(Buf* self)
+{
+    if (self->size + 1 > self->capacity)
+        if (__BufReserve(self, self->size + 1) != 0)
+            return -1;
+
+    self->data[self->size] = '\0';
+    return 0;
+}
+
+#define BufDefine(NAME, SIZE) \
+    Alloc alloc##NAME; \
+    char allocBuf##NAME[SIZE]; \
+    Buf buf; \
+    AllocInit(&alloc##NAME, allocBuf##NAME, sizeof(allocBuf##NAME)); \
+    BufInit(&NAME, &alloc##NAME)
+
+#endif /* _buf_h */

@@ -1,0 +1,8 @@
+{
+    "@odata.context": "http://service/rest/v1/$metadata#Managers/$entity",
+    "@odata.editLink": "Managers/1",
+    "Name": "Manager",
+    "Modified": "2012-03-07T14:44",
+    "ManagerForServers@odata.navigationLink": "Managers/1/ManagerForServers",
+    "NetworkService@odata.navigationLink": "Managers/1/NetworkService"
+}

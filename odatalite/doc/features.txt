@@ -1,0 +1,43 @@
+Macro features:
+
+    Features                                    Priority        Supported
+    ========================================================================
+    HTTP Basic                                  (A)             (X)
+    Role-based authorization                    (A)             (X)
+    PAM Authentication                          (A)             (X)
+    Flat-file logging                           (A)             (X)
+    JSON serializer                             (A)             (X)
+    JSON deserializer                           (A)             (X)
+    Provider interface                          (A)             (X)
+    Protocol tracing                            (A)             (X)
+    Basic operations                            (A)             (X)
+    Client-driven paging                        (A)             (X)
+    Get single property/value                   (A)             (X)
+    Server-driven paging                        (A)             ( )
+    Schema-based providers (generator)          (A)             ( )
+    Expand query options ($expand)              (A)             ( )
+    Handle etags                                (A)             ( )
+    Edit links                                  (A)             ( )
+    Actions                                     (A)             ( )
+    -------------------------------------------------------------------------
+    Out-of-process providers                    (B)             ( )
+    Events                                      (B)             ( )
+    Command-line execution plugin               (B)             ( )
+    Provider timed unload                       (B)             ( )
+    HTTPS (SSL)                                 (B)             ( )
+    Provider logging support                    (B)             ( )
+    Discovery protocol                          (B)             ( )
+    Thread safety                               (B)             ( )
+    -------------------------------------------------------------------------
+    IPV6                                        (C)             ( )
+    Client API                                  (C)             ( )
+    HTTP digest authentication                  (C)             ( )
+    Kerberos authentication                     (C)             ( )
+    Password file authentication                (C)             ( )
+    Syslog logging                              (C)             ( )
+    Windows support                             (C)             ( )
+
+Micro features:
+
+    (*) Support PUT (in addition to PATCH)
+

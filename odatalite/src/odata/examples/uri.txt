@@ -1,0 +1,45 @@
+
+    GET serviceRoot/People 
+
+    GET serviceRoot/Airports('KSFO')/Location/Address
+
+    GET serviceRoot/Airports?$filter=contains(Location/Address, 'San Francisco')
+
+    GET serviceRoot/People?$filter=Gender eq Microsoft.OData.SampleService.Models.TripPin.PersonGender'Female' 
+
+    GET serviceRoot/People('russellwhyte') 
+
+    GET serviceRoot/Airports('KSFO')/Name 
+
+    GET serviceRoot/Airports('KSFO')/Name/$value 
+
+    GET serviceRoot/People?$filter=FirstName eq 'Scott'
+
+    GET serviceRoot/Airports?$filter=contains(Location/Address, 'San Francisco')
+
+
+    GET serviceRoot/People?$filter=Gender eq Microsoft.OData.SampleService.Models.TripPin.PersonGender'Female' 
+
+    GET serviceRoot/People?$expand=Trips($filter=Name eq 'Trip in US')
+
+    GET serviceRoot/People('scottketchum')/Trips?$orderby=EndsAt desc
+
+
+
+    GET serviceRoot/People?$top=2 
+
+    GET serviceRoot/People?$skip=18 
+
+    GET serviceRoot/People/$count 
+
+    GET serviceRoot/People('keithpinckney')?$expand=Friends 
+
+    GET serviceRoot/Airports?$select=Name, IcaoCode
+
+    serviceRoot/People?$search=Boise
+
+    GET serviceRoot/People?$filter=Emails/any(s:endswith(s, 'contoso.com'))
+
+    GET serviceRoot/Me/Friends?$filter=Friends/any(f:f/FirstName eq 'Scott')
+
+

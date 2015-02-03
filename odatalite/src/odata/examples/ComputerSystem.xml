@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+  
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OData"/>
+  </edmx:Reference>
+  <edmx:References Uri="http://DMTF.org.Schema/Core">
+    <edmx:Include Namespace="Core"/>
+  </edmx:References>
+  <edmx:References Uri="http://DMTF.org.Schema/Chassis">
+    <edmx:Include Namespace="Chassis"/>
+  </edmx:References>
+  <edmx:References Uri="http://DMTF.org.Schema/LogService">
+    <edmx:Include Namespace="LogService"/>
+  </edmx:References>
+  <edmx:References Uri="http://DMTF.org.Schema/EthernetNetworkInterface">
+    <edmx:Include Namespace="EthernetNetworkInterface"/>
+  </edmx:References>
+  <edmx:References Uri="http://DMTF.org.Schema/SimpleStorage">
+    <edmx:Include Namespace="SimpleStorage"/>
+  </edmx:References>
+  <edmx:References Uri="http://DMTF.org.Schema/Firmware">
+    <edmx:Include Namespace="Firmware"/>
+  </edmx:References>
+
+  <edmx:DataServices>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ComputerSystem">
+
+      <!-- This schema defines a computer system and its respective properties. 
+                A computer system represents a machine (physical or virtual) and the local 
+                resources such as memory, cpu and other devices that can be accessed from that machine. -->
+      <EntityType Name="ComputerSystem" BaseType="Core.Resource">
+        <Property Name="SystemType" Type="ComputerSystem.SystemType"/>
+        <Property Name="AssetTag" Type="Edm.String"/>
+        <Property Name="Manufacturer" Type="Edm.String"/>
+        <Property Name="Model" Type="Edm.String"/>
+        <Property Name="SKU" Type="Edm.String"/>
+        <Property Name="SerialNumber" Type="Edm.String"/>
+        <Property Name="Version" Type="Edm.String"/>
+        <Property Name="PartNumber" Type="Edm.String"/>
+        <Property Name="VirtualSerialNumber" Type="Edm.String"/>
+        <Property Name="UUID" Type="Edm.String"/>
+        <Property Name="BIOSPOSTCode" Type="Edm.Integer"/>
+
+<ATTN/>
+        <Property Name="IndicatorLED" Type="Core.IndicatorLED"/>
+        <Property Name="Power" Type="ComputerSystem.PowerState"/>
+
+        <Property Name="Boot" Type="ComputerSystem.Boot"/>
+        <Property Name="Bios" Type="ComputerSystem.Bios"/>
+        <Property Name="Processors" Type="ComputerSystem.Processors"/>
+        <Property Name="Memory" Type="ComputerSystem.Memory"/>
+        <Property Name="HostCorrelation" Type="Collection(ComputerSystem.HostCorrelation)"/>
+<BOOKMARK1/>
+        <NavigationProperty Name="Chassis" Type="Collection(Chassis.Chassis)"/>
+        <NavigationProperty Name="ManagedBy" Type="Collection(ManagerAccount.ManagerAccount)"/>
+        <NavigationProperty Name="SimpleNetwork" Type="EthernetNetworkInterface.EtherenetNetworkInterface"/>
+        <NavigationProperty Name="SimpleStorage" Type="SimpleStorage.SimpleStorage"/>
+        <NavigationProperty Name="LogService" Type="LogService.LogService"/>
+      </EntityType>
+
+      <EnumType Name="SystemType">
+        <Member Name="Physical"/>
+        <Member Name="Virtual"/>
+        <Member Name="OS"/>
+        <Member Name="PhysicallyPartitioned"/>
+        <Member Name="VirtuallyPartitioned"/>
+      </EnumType>
+
+      <EnumType Name="PowerState">
+        <Member Name="Unknown"/>
+        <Member Name="On"/>
+        <Member Name="Off"/>
+        <Member Name="Reset"/>
+      </EnumType>
+
+      <ComplexType Name="Boot">
+        <Property Name="BootSourceOverrideTarget" Type="ComputerSystem.BootSource"/>
+        <Property Name="BootSourceOverrideSupported" Type="Collection(ComputerSystem.BootSource)"/>
+        <Property Name="BootSourceOverrideEnabled" Type="Collection(ComputerSystem.BootSourceOverrideEnabled)"/>
+        <Property Name="UefiTargetBootSourceOverride" Type="Edm.String"/>
+      </ComplexType>
+
+      <EnumType Name="BootSource">
+        <Member Name="None"/>
+        <Member Name="Pxe"/>
+        <Member Name="Floppy"/>
+        <Member Name="Cd"/>
+        <Member Name="Usb"/>
+        <Member Name="Hdd"/>
+        <Member Name="BiosSetup"/>
+        <Member Name="Utilities"/>
+        <Member Name="Diags"/>
+        <Member Name="UefiShell"/>
+        <Member Name="UefiTarget"/>
+      </EnumType>
+
+      <EnumType Name="BootSourceOverrideEnabled">
+        <Member Name="Disabled"/>
+        <Member Name="Once"/>
+        <Member Name="Continuous"/>
+      </EnumType>
+
+      <ComplexType Name="Bios" OpenType="true">
+        <Property Name="Current" Type="Firmware.FirmwareVersion"/>
+      </ComplexType>
+
+      <ComplexType Name="Processors">
+        <Property Name="Count" Type="Edm.Integer"/>
+        <Property Name="ProcessorFamily" Type="Edm.String"/>
+        <Property Name="Status" Type="Core.Status"/>
+      </ComplexType>
+
+      <ComplexType Name="Memory">
+        <Property Name="TotalSystemMemoryGB" Type="Edm.Integer"/>
+        <Property Name="Status" Type="Core.Status"/>
+      </ComplexType>
+
+      <!--Consider aligning with IPAddresses?-->
+      <ComplexType Name="HostCorrelation">
+          <Property Name="IPAddress" Type="Collection(ComputerSystem.IPAddress)"/>
+          <Property Name="SubnetMask" Nullable="true" Type="ComputerSystem.SubnetMask" />
+          <Property Name="AddressOrigin" Nullable="true" Type="ComputerSystem.AddressOrigin" />
+          <Property Name="Gateway" Nullable="true" Type="Edm.String" />
+          <Property Name="HostFactoryMacAddress" Type="ComputerSystem.MacAddress"/>
+          <Property Name="HostMacAddress" Nullable="true" Type="Collection(ComputerSystem.MacAddress)"/>
+          <Property Name="HostName" Type="Edm.String"/>
+          <Property Name="HostFQDN" Type="Edm.String"/>
+          <Property Name="NameServers" Nullable="true" Type="Collection(Edm.String)" />
+      </ComplexType>
+
+      <!--Strongly typed property for SubnetMask-->
+      <TypeDef Name="SubnetMask" UnderlyingType="Edm.String"/>
+
+      <!--Strongly typed property for MacAddress-->
+      <TypeDef Name="MacAddress" UnderlyingType="Edm.String"/>
+
+      <EnumType Name="ResetType">
+        <Member Name="On"/>
+        <Member Name="ForceOff"/>
+        <Member Name="GracefulRestart"/>
+        <Member Name="ForceRestart"/>
+        <Member Name="Nmi"/>
+        <Member Name="ForceOn"/>
+        <Member Name="PushPowerButton"/>
+      </EnumType>
+
+      <Action Name="Reset">
+        <Parameter Name="ResetType" Type="ComputerSystem.ResetType" Nullable="false" />
+           <Annotation Term="AllowableValues">
+             <Collection>
+               <EnumMember>ComputerSystem.ResetType/On</EnumMember>
+               <EnumMember>ComputerSystem.ResetType/ForceOff</EnumMember>
+             </Collection>
+          </Annotation>
+      </Action>
+
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

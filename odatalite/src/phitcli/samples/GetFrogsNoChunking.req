@@ -1,0 +1,4 @@
+GET odata/Frogs
+OData-Version: 4.0
+Accept: application/json
+

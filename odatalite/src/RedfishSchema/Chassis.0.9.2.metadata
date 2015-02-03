@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OData"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/DMTFExtensions">
+    <edmx:Include Namespace="DMTFExtensions.0.9.2" Alias="DMTF"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Resource">
+    <edmx:Include Namespace="Resource.0.9.2" Alias="Resource"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/LogService">
+    <edmx:Include Namespace="LogService.0.9.2" Alias="LogService"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/ThermalMetrics">
+    <edmx:Include Namespace="ThermalMetrics.0.9.2" Alias="ThermalMetrics"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/PowerMetrics">
+    <edmx:Include Namespace="PowerMetrics.0.9.2" Alias="PowerMetrics"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/MiscMetrics">
+    <edmx:Include Namespace="MiscMetrics.0.9.2" Alias="MiscMetrics"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/ManagerAccount">
+    <edmx:Include Namespace="ManagerAccount.0.9.2" Alias="ManagerAccount"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/ComputerSystem">
+    <edmx:Include Namespace="ComputerSystem.0.9.2" Alias="ComputerSystem"/>
+  </edmx:Reference>
+  
+  <edmx:DataServices>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Chassis.0.9.2" Alias="Chassis">
+
+      <!-- This schema defines a computer system and its respective properties. -->
+      <EntityType Name="Chassis" BaseType="Resource.Resource">
+        <Annotation Term="OData.Description" String="This is the schema definition for the Chassis resource.  It represents the properties for physical components for any system.  This one object is intended to represent racks, rackmount servers, blades, standalone, modular systems, enclosures, and all other containers.  The non-cpu/device centric parts of the schema are all accessed either directly or indirectly through this resource."/>
+        <Annotation Term="OData.LongDescription" String="This resource shall be used to represent a chassis or other physical enclosure for an SPMA implementation."/>
+        <Property Name="ChassisType" Nullable="false" Type="Chassis.ChassisType">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This property indicates the type of physical form factor of this resource."/>
+          <Annotation Term="OData.LongDescription" String="ChassisType shall indicate the physical form factor for the type of chassis."/>
+          <Annotation Term="DMTF.Required"/>
+        </Property>
+        <Property Name="Manufacturer" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the manufacturer of this chassis."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the name of the organization responsible for producing the chassis. This organization might be the entity from whom the chassis is purchased, but this is not necessarily true."/>
+        </Property>
+        <Property Name="Model" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the model number for the chassis."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the name by which the manufacturer generally refers to the chassis."/>
+        </Property>
+        <Property Name="SKU" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the SKU for this chassis."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the stock-keeping unit number for this chassis."/>
+        </Property>
+        <Property Name="SerialNumber" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the serial number for this chassis."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a manufacturer-allocated number used to identify the chassis."/>
+        </Property>
+        <Property Name="Version" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the version of this chassis."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a string that indicates the producers or manufacturer's version of the chassis."/>
+        </Property>
+        <Property Name="PartNumber" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the part number of this chassis."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a part number assigned by the organization that is responsible for producing or manufacturing the chassis."/>
+        </Property>
+        <Property Name="AssetTag" Type="Edm.String">
+          <Annotation Term="OData.Description" String="This is a user assigned asset tag for this chassis."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be an identifying string used to track the chassis for inventory purposes."/>
+        </Property>
+        <Property Name="IndicatorLED" Type="Chassis.IndicatorLED">
+          <Annotation Term="OData.Description" String="This is the indicator LED for the chassis, used to identify the chassis.  This LED can be manipulated by the user."/>
+          <Annotation Term="OData.LongDescription" String="This value of this property shall contain the indicator light state for the indicator light associated with this system."/>
+        </Property>
+        <Property Name="Links" Type="Chassis.Links" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The links object contains the links to other resources that are related to this resource."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="Links">
+        <NavigationProperty Name="LogService" Type="LogService.LogService">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="A reference to the logs for this chassis."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a link to a collection LogServices."/>
+        </NavigationProperty>
+        <NavigationProperty Name="ComputerSystems" Type="Collection(ComputerSystem.ComputerSystem)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="An array of references to the computer systems contained in this chassis.  This will only reference ComputerSystems that are directly and wholly contained in this chassis."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a reference to the resource that this physical container is associated with and shall reference a resource of type ComputerSystem.  If a ComputerSystem is also referenced in a Chassis that is referenced in a Contains link from this resource, that ComputerSystem shall not be referenced in this Chassis."/>
+          <Annotation Term="DMTF.ExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="ManagedBy" Type="Collection(ManagerAccount.ManagerAccount)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="An array of references to the managers contained in this chassis."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a reference to the resource that manages this chassis and shall reference a resource of type Manager."/>
+          <Annotation Term="DMTF.ExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="ThermalMetrics" Type="ThermalMetrics.ThermalMetrics" ContainsTarget="true">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="A reference to the thermal metrics (fans, cooling, sensors) for this chassis."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a reference to the resource that represents the thermal characteristics of this chassis and shall be of type ThermalMetrics."/>
+          <Annotation Term="DMTF.ExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="PowerMetrics" Type="PowerMetrics.PowerMetrics" ContainsTarget="true">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="A reference to the power metrics (power supplies, power policies, sensors) for this chassis."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a reference to the resource that represents the power characteristics of this chassis and shall be of type PowerMetrics."/>
+          <Annotation Term="DMTF.ExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="MiscMetrics" Type="MiscMetrics.MiscMetrics" ContainsTarget="true">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="A reference to the various other metrics (presence, etc.) for this chassis."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a reference to the resource that represents the non-power and non-thermal characteristics of this chassis and shall be of type MiscMetrics."/>
+          <Annotation Term="DMTF.ExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="ContainedBy" Type="Chassis.Chassis">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="A reference to the chassis that this chassis is contained by."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a reference to the resource that represents the chassis that contains this chassis and shall be of type Chassis."/>
+          <Annotation Term="DMTF.ExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="Contains" Type="Collection(Chassis.Chassis)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="An array of references to any other chassis that this chassis has in it."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a reference to the resource that represents the chassis that this chassis contains and shall be of type Chassis or another Collection."/>
+          <Annotation Term="DMTF.ExpandReferences"/>
+        </NavigationProperty>
+        <Property Name="Oem" Type="Resource.Oem"/>
+      </ComplexType>
+
+      <!-- These are all supported Chassis types. -->
+      <EnumType Name="ChassisType">
+        <Member Name="Rack">
+          <Annotation Term="OData.Description" String="An equipment rack, typically a 19-inch wide freestanding unit"/>
+        </Member>
+        <Member Name="Blade">
+          <Annotation Term="OData.Description" String="An enclosed or semi-enclosed, typically vertically-oriented, system chassis which must be plugged into a multi-system chassis to function normally"/>
+        </Member>
+        <Member Name="Enclosure">
+          <Annotation Term="OData.Description" String="A generic term for a chassis that does not fit any other description"/>
+        </Member>
+        <Member Name="StandAlone">
+          <Annotation Term="OData.Description" String="A single, free-standing system, commonly called a tower or desktop chassis"/>
+        </Member>
+        <Member Name="RackMount">
+          <Annotation Term="OData.Description" String="A single system chassis designed specifically for mounting in an equipment rack"/>
+        </Member>
+        <Member Name="Card">
+          <Annotation Term="OData.Description" String="A loose device or circuit board intended to be installed in a system or other enclosure"/>
+        </Member>
+        <Member Name="Cartridge">
+          <Annotation Term="OData.Description" String="A small self-contained system intended to be plugged into a multi-system chassis"/>
+        </Member>
+        <Member Name="Row">
+          <Annotation Term="OData.Description" String="A collection of equipment racks"/>
+        </Member>
+        <Member Name="Pod">
+          <Annotation Term="OData.Description" String="A collection of equipment racks in a large, likely transportable, container"/>
+        </Member>
+        <Member Name="Expansion">
+          <Annotation Term="OData.Description" String="A chassis which expands the capabilities or capacity of another chassis"/>
+        </Member>
+        <Member Name="Sidecar">
+          <Annotation Term="OData.Description" String="A chassis that mates mechanically with another chassis to expand its capabilities or capacity"/>
+        </Member>
+        <Member Name="Zone">
+          <Annotation Term="OData.Description" String="A logical division or portion of a physical chassis that contains multiple devices or systems that cannot be physically separated"/>
+        </Member>
+        <Member Name="Sled">
+          <Annotation Term="OData.Description" String="An enclosed or semi-enclosed, system chassis which must be plugged into a multi-system chassis to function normally similar to a blade type chassis."/>
+        </Member>
+        <Member Name="Shelf">
+          <Annotation Term="OData.Description" String="An enclosed or semi-enclosed, typically horizontally-oriented, system chassis which must be plugged into a multi-system chassis to function normally"/>
+        </Member>
+        <Member Name="Other">
+          <Annotation Term="OData.Description" String="A chassis that does not fit any of these definitions"/>
+        </Member>
+      </EnumType>
+
+      <!-- These are all supported LED statuses. -->
+      <EnumType Name="IndicatorLED">
+        <Member Name="Unknown">
+          <Annotation Term="OData.Description" String="The state of the Indicator LED cannot be determined."/>
+        </Member>
+        <Member Name="Lit">
+          <Annotation Term="OData.Description" String="The Indicator LED is lit."/>
+        </Member>
+        <Member Name="Blinking">
+          <Annotation Term="OData.Description" String="The Indicator LED is blinking."/>
+        </Member>
+        <Member Name="Off">
+          <Annotation Term="OData.Description" String="The Indicator LED is off."/>
+        </Member>
+      </EnumType>
+     
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

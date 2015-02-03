@@ -1,0 +1,4 @@
+GET odata/Frogs(UserName='kermit')
+OData-Version: 4.0
+Accept: application/json;odata.metadata=full
+

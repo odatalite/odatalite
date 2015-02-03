@@ -1,0 +1,41 @@
+{
+   "odata.metadata":"http://services.odata.org/V3/OData/OData.svc/$metadata#Products",
+   "value":[
+      {
+         "odata.type":"ODataDemo.Product",
+         "odata.id":"http://services.odata.org/V3/OData/OData.svc/Products(0)",
+         "odata.editLink":"Products(0)",
+         "Category@odata.navigationLinkUrl":"Products(0)/Category",
+         "Category@odata.associationLinkUrl":"Products(0)/$links/Category",
+         "Supplier@odata.navigationLinkUrl":"Products(0)/Supplier",
+         "Supplier@odata.associationLinkUrl":"Products(0)/$links/Supplier",
+         "ID":0,
+         "Name":"Bread",
+         "Description":"Whole grain bread",
+         "ReleaseDate@odata.type":"Edm.DateTime",
+         "ReleaseDate":"1992-01-01T00:00:00",
+         "DiscontinuedDate":null,
+         "Rating":4,
+         "Price@odata.type":"Edm.Decimal",
+         "Price":"2.5"
+      },
+      {
+         "odata.type":"ODataDemo.Product",
+         "odata.id":"http://services.odata.org/V3/OData/OData.svc/Products(1)",
+         "odata.editLink":"Products(1)",
+         "Category@odata.navigationLinkUrl":"Products(1)/Category",
+         "Category@odata.associationLinkUrl":"Products(1)/$links/Category",
+         "Supplier@odata.navigationLinkUrl":"Products(1)/Supplier",
+         "Supplier@odata.associationLinkUrl":"Products(1)/$links/Supplier",
+         "ID":1,
+         "Name":"Milk",
+         "Description":"Low fat milk",
+         "ReleaseDate@odata.type":"Edm.DateTime",
+         "ReleaseDate":"1995-10-01T00:00:00",
+         "DiscontinuedDate":null,
+         "Rating":3,
+         "Price@odata.type":"Edm.Decimal",
+         "Price":"3.5"
+      },
+      ]
+}

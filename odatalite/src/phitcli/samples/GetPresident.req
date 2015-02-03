@@ -1,0 +1,5 @@
+GET odata/Presidents(Id=1)
+OData-Version: 4.0
+Accept: application/json
+TE: trailers, chunked
+

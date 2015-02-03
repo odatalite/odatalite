@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OData"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/DMTFExtensions">
+    <edmx:Include Namespace="DMTFExtensions.0.9.2" Alias="DMTF"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Resource">
+    <edmx:Include Namespace="Resource.0.9.2" Alias="Resource"/>
+  </edmx:Reference>
+
+  <edmx:DataServices>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="MiscMetrics.0.9.2" Alias="MiscMetrics">
+
+      <!-- This resource represents Miscellaneous Metrics and its respective properties -->
+      <EntityType Name="MiscMetrics" BaseType="Resource.Resource">
+        <Annotation Term="OData.Description" String="This is the schema definition for the Miscellaneous Metrics resource.  It represents any sensors or metrics that are not thermal or power related.  Examples of these are intrusion detection and various alarms."/>
+        <Annotation Term="OData.LongDescription" String="This resource shall be used to represent the miscellaneous metrics resources for an SPMA implementation."/>
+        <Property Name="Intrusion" Type="Collection(MiscMetrics.Intrusion)" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+        </Property>
+        <Property Name="Misc" Type="Collection(MiscMetrics.MiscellaneousMetrics)" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="Metric">
+        <Property Name="Name" Type="Edm.String" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description"  String="The name of the resource or array element."/>
+          <Annotation Term="OData.LongDescription" String="This object represents the Name property.  All values for resources described by this schema shall comply to the requirements as described in the SPMA specification. The value of this string shall be of the format for the reserved word *Name*."/>
+          <Annotation Term="DMTF.Required"/>
+        </Property>
+        <Property Name="Number" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The sensor's number, if available."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the EntityInstance from IPMI spec if sensor is consistent with IPMI's SEL, otherwise it is implementation specific."/>
+        </Property>
+        <Property Name="Status" Nullable="false" Type="Resource.Status"/>
+        <Property Name="CurrentReading" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="Current value of the metric or sensor."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the current reading of the metric or sensor."/>
+        </Property>
+      </ComplexType>
+
+      <ComplexType Name="Intrusion" BaseType="MiscMetrics.Metric">
+        <Property Name="SensorType" Type="MiscMetrics.IntrusionSensorType" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The type of sensor"/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the enumerated type of Intrusion sensor described by this instance."/>
+        </Property>
+      </ComplexType>
+
+      <EnumType Name="IntrusionSensorType">
+        <Member Name="Physical(Chassis) Security"/>
+        <Member Name="Platform Security Violation Attempt"/>
+      </EnumType>
+
+      <ComplexType Name="MiscellaneousMetrics" BaseType="MiscMetrics.Metric">
+        <Property Name="SensorType" Type="MiscMetrics.MiscellaneousSensorType" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The type of sensor"/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the enumerated type of Misc sensor described by this instance"/>
+        </Property>
+      </ComplexType>
+
+      <EnumType Name="MiscellaneousSensorType">
+        <Member Name="OtherUnitsBasedSensor"/>
+        <Member Name="Memory"/>
+        <Member Name="DriveSlotOrBay"/>
+        <Member Name="POSTMemoryResize"/>
+        <Member Name="SystemFirmwareProgress"/>
+        <Member Name="EventLoggingDisabled"/>
+        <Member Name="SystemEvent"/>
+        <Member Name="CriticalInterrupt"/>
+        <Member Name="ButtonOrSwitch"/>
+        <Member Name="ModuleOrBoard"/>
+        <Member Name="MicrocontrollerOrCoprocessor"/>
+        <Member Name="AddInCard"/>
+        <Member Name="Chassis"/>
+        <Member Name="ChipSet"/>
+        <Member Name="OtherFRU"/>
+        <Member Name="CableOrInterconnect"/>
+        <Member Name="Terminator"/>
+        <Member Name="SystemBootOrRestart"/>
+        <Member Name="BootError"/>
+        <Member Name="BaseOSBootOrInstallationStatus"/>
+        <Member Name="OSStopOrShutdown"/>
+        <Member Name="SlotOrConnector"/>
+        <Member Name="SystemACPIPowerState"/>
+        <Member Name="Watchdog"/>
+        <Member Name="PlatformAlert"/>
+        <Member Name="EntityPresence"/>
+        <Member Name="MonitorASICOrIC"/>
+        <Member Name="LAN"/>
+        <Member Name="ManagementSubsystemHealth"/>
+        <Member Name="SessionAudit"/>
+        <Member Name="VersionChange"/>
+        <Member Name="FRUState"/>
+        <Member Name="Humidity"/>
+        <Member Name="Water"/>
+      </EnumType>
+
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

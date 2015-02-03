@@ -1,0 +1,19 @@
+{
+   "odata.metadata":"http://services.odata.org/V3/OData/OData.svc/$metadata#Products/@Element",
+   "odata.type":"ODataDemo.Product",
+   "odata.id":"http://services.odata.org/V3/OData/OData.svc/Products(2)",
+   "odata.editLink":"Products(2)",
+   "Category@odata.navigationLinkUrl":"Products(2)/Category",
+   "Category@odata.associationLinkUrl":"Products(2)/$links/Category",
+   "Supplier@odata.navigationLinkUrl":"Products(2)/Supplier",
+   "Supplier@odata.associationLinkUrl":"Products(2)/$links/Supplier",
+   "ID":2,
+   "Name":"Vint soda",
+   "Description":"Americana Variety - Mix of 6 flavors",
+   "ReleaseDate@odata.type":"Edm.DateTime",
+   "ReleaseDate":"2000-10-01T00:00:00",
+   "DiscontinuedDate":null,
+   "Rating":3,
+   "Price@odata.type":"Edm.Decimal",
+   "Price":"20.9"
+}

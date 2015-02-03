@@ -1,0 +1,66 @@
+{
+  "Byte": true,
+  "\\.[A-Za-z0-9]+$": "XYZ",
+  "Pattern": "\\.[A-Za-z0-9]+$",
+  "String": "\r\n\t\f\b",
+  "String": "\u0001\u0002\u0003\u0004",
+  "String": "\\\nLF\rCR\tTAB\rCR\u0001ONE",
+  "Int32": 12345678,
+  "Double": 1.234560E+02,
+  "Date": "2014-08-08",
+  "TimeOfDay": "12:00:03.12345",
+  "DateTimeOffset": "2014-08-13T12:00:03.12345",
+  "Person": {
+    "First": "John",
+    "Last": "Smith",
+    "Age": 25
+  },
+  "Colors": [
+    "red",
+    "green",
+    "blue"
+  ],
+  "ByteA": [
+    0,
+    255
+  ],
+  "SByteA": [
+    -8,
+    8
+  ],
+  "Int16A": [
+    -16,
+    16
+  ],
+  "Int32A": [
+    -32,
+    32
+  ],
+  "Int64A": [
+    -64,
+    64,
+    12345
+  ],
+  "Persons": [
+    {
+      "First": "John",
+      "Last": "Smith",
+      "Age": 25
+    },
+    {
+      "First": "John",
+      "Last": "Smith",
+      "Age": 25
+    }
+  ],
+  "Guid": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+  "Mixed": [
+    "string",
+    12345,
+    {
+      "First": "John",
+      "Last": "Smith",
+      "Age": 25
+    }
+  ]
+}

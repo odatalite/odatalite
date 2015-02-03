@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+  
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OData"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/DMTFExtensions">
+    <edmx:Include Namespace="DMTFExtensions.0.9.2" Alias="DMTF"/>
+    <edmx:Include Namespace="Validation.0.9.2" Alias="Validation"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Resource">
+    <edmx:Include Namespace="Resource.0.9.2" Alias="Resource"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Chassis">
+    <edmx:Include Namespace="Chassis.0.9.2" Alias="Chassis"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/LogService">
+    <edmx:Include Namespace="LogService.0.9.2" Alias="LogService"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/EthernetNetworkInterface">
+    <edmx:Include Namespace="EthernetNetworkInterface.0.9.2" Alias="EthernetNetworkInterface"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/SimpleStorage">
+    <edmx:Include Namespace="SimpleStorage.0.9.2" Alias="SimpleStorage"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/ManagerAccount">
+    <edmx:Include Namespace="ManagerAccount.0.9.2" Alias="ManagerAccount"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Firmware">
+    <edmx:Include Namespace="Firmware.0.9.2" Alias="Firmware"/>
+  </edmx:Reference>
+
+  <edmx:DataServices>
+
+    <!-- This schema defines a computer system and its respective properties.-->
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ComputerSystem.0.9.2" Alias="ComputerSystem">
+
+      <EntityType Name="ComputerSystem" BaseType="Resource.Resource">
+        <Annotation Term="OData.Description" String="This schema defines a computer system and its respective properties.  A computer system represents a machine (physical or virtual) and the local resources such as memory, cpu and other devices that can be accessed from that machine."/>
+        <Annotation Term="OData.LongDescription" String="This resource shall be used to represent resources that represent a computing system in the SPMA specification."/>
+        <Property Name="SystemType" Type="ComputerSystem.SystemType" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The type of computer system represented by this resource."/>
+          <Annotation Term="OData.LongDescription" String="An enumeration that indicates the kind of system that this resource represents."/>
+        </Property>
+        <Property Name="Links" Type="ComputerSystem.Links" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="Contains links to other resources that are related to this resource."/>
+        </Property>
+        <Property Name="AssetTag" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/ReadWrite"/>
+          <Annotation Term="OData.Description" String="This is a user definable tag that can be used to track this computer system for inventory or other client purposes."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the value of the asset tag of the system."/>
+        </Property>
+        <Property Name="Manufacturer" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the manufacturer or OEM of this computer system."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain a value that represents the manufacturer of the system."/>
+        </Property>
+        <Property Name="Model" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the model information that the manufacturer refers to this comptuer system as."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the information about how the manufacturer references this system."/>
+        </Property>
+        <Property Name="SKU" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The manufacturers SKU for this system."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the Stock Keeping Unit (SKU) for the system."/>
+        </Property>
+        <Property Name="SerialNumber" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The serial number for this system."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the serial number for the system."/>
+        </Property>
+        <Property Name="Version" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The version of this system as defined by the manufacturer."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the manufacturer's designated version for the system."/>
+        </Property>
+        <Property Name="PartNumber" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The part number for this system according to the manufacturer."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the part number for the system."/>
+        </Property>
+        <Property Name="VirtualSerialNumber" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The virtual serial number for this system"/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the virtual serial number for the system."/>
+        </Property>
+        <Property Name="UUID" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The universal unique identifier for this system."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the universal unique identifier number for the system."/>
+        </Property>
+        <Property Name="HostCorrelation" Type="ComputerSystem.HostCorrelation"  Nullable="false">
+          <Annotation Term="OData.Description" String="This object shall contain operating environment reference information to correlate the system information with the host operating environment information to assist clients with correlating the two access points."/>
+        </Property>
+        <Property Name="BIOSPOSTCode" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the BIOS Power on Self Test code from the last system boot."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the BIOS Power On Self Test code."/>
+        </Property>
+        <Property Name="IndicatorLED" Type="ComputerSystem.IndicatorLED">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The state of the indicator LED."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the indicator light state for the indicator light associated with this system."/>
+        </Property>
+        <Property Name="Power" Type="ComputerSystem.PowerState">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the current power state of the system."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the power state of the system."/>
+        </Property>
+        <Property Name="Boot" Type="ComputerSystem.Boot"  Nullable="false">
+          <Annotation Term="OData.Description" String="This object contains the boot information for the current resource."/>
+        </Property>
+        <Property Name="Bios" Type="ComputerSystem.Bios"  Nullable="false">
+          <Annotation Term="OData.Description" String="This object provides information about the System BIOS."/>
+        </Property>
+        <Property Name="Processors" Type="ComputerSystem.Processors"  Nullable="false">
+          <Annotation Term="OData.Description" String="This object describes the central processors of the system in general detail."/>
+        </Property>
+        <Property Name="Memory" Type="ComputerSystem.Memory"  Nullable="false">
+          <Annotation Term="OData.Description" String="This object describes the central memory of the system in general detail."/>
+        </Property>
+        <Property Name="Actions" Type="ComputerSystem.Actions" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The Actions object contains the available custom actions on this resource."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="Links">
+        <NavigationProperty Name="Chassis" Type="Collection(Chassis.Chassis)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="An array of references to the chassis in which this system is contained"/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall reference a resource of type Chassis that represents the physical container associated with this resource."/>
+          <Annotation Term="DMTF.ExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="ManagedBy" Type="Collection(ManagerAccount.ManagerAccount)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="An array of references to the Managers responsible for this system"/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall reference a resource of type manager that represents the resource with management responsibility for this resource."/>
+          <Annotation Term="DMTF.ExpandReferences"/>
+        </NavigationProperty>
+        <NavigationProperty Name="SimpleNetwork" Type="Collection(EthernetNetworkInterface.EthernetNetworkInterface)" ContainsTarget="true">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="A reference to the Ethernet interfaces associated with this system"/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a link to a collection of EthernetNetworkInterfaces."/>
+        </NavigationProperty>
+        <NavigationProperty Name="SimpleStorage" Type="Collection(SimpleStorage.SimpleStorage)" ContainsTarget="true">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="A reference to the storage devices associated with this system"/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a link to a collection of SimpleStorages."/>
+        </NavigationProperty>
+        <NavigationProperty Name="LogService" Type="Collection(LogService.LogService)" ContainsTarget="true">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="A reference to the Log Service associated with this system"/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a link to a collection of LogServices."/>
+        </NavigationProperty>
+        <Property Name="Oem" Type="Resource.Oem"/>
+      </ComplexType>
+
+      <ComplexType Name="Actions">
+        <Property Name="Oem" Type="ComputerSystem.OemActions"/>
+      </ComplexType>
+      <ComplexType Name="OemActions"/>
+
+      <!-- The reset action resets/reboots the ComputerSystem.-->
+      <!-- Invocation pattern: /rest/v1/ComputerSystems/1/Actions/ComputerSystem.Reset-->
+      <Action Name="Reset" Isbound="true">
+        <Parameter Name="ComputerSystem" Type="ComputerSystem.Actions"/>
+        <Parameter Name="ResetType" Type="ComputerSystem.ResetType">
+          <Annotation Term="OData.Description" String="This is the type of reset to be performed."/>
+          <Annotation Term="OData.LongDescription" String="This defines the property name for the action."/>
+        </Parameter>
+        <Annotation Term="OData.Description" String="This action is used to reset the system."/>
+        <Annotation Term="OData.LongDescription" String="This defines the name of the custom action supported on this resource."/>
+      </Action>
+
+      <EnumType Name="ResetType">
+        <Member Name="On">
+          <Annotation Term="OData.Description" String="Turn the system on"/>
+        </Member>
+        <Member Name="ForceOff">
+          <Annotation Term="OData.Description" String="Turn the system off immediately (non-graceful) shutdown"/>
+        </Member>
+        <Member Name="GracefulRestart">
+          <Annotation Term="OData.Description" String="Perform a graceful system shutdown followed by a restart of the system"/>
+        </Member>
+        <Member Name="ForceRestart">
+          <Annotation Term="OData.Description" String="Perform an immediate (non-graceful) shutdown, followed by a restart of the system"/>
+        </Member>
+        <Member Name="Nmi">
+          <Annotation Term="OData.Description" String="Generate a Non-Maskable Interrupt to cause an immediate system halt"/>
+        </Member>
+        <Member Name="ForceOn">
+          <Annotation Term="OData.Description" String="Turn the system on immediately"/>
+        </Member>
+        <Member Name="PushPowerButton">
+          <Annotation Term="OData.Description" String="Simulate the pressing of the physical power button on this system"/>
+        </Member>
+      </EnumType>
+        
+      <EnumType Name="SystemType">
+        <Member Name="Physical">
+          <Annotation Term="OData.Description" String="A computer system"/>
+        </Member>
+        <Member Name="Virtual">
+          <Annotation Term="OData.Description" String="A virtual machine instance running on this system"/>
+        </Member>
+        <Member Name="OS">
+          <Annotation Term="OData.Description" String="An operating system instance"/>
+        </Member>
+        <Member Name="PhysicallyPartitioned">
+          <Annotation Term="OData.Description" String="A hardware-based partition of a computer system"/>
+        </Member>
+        <Member Name="VirtuallyPartitioned">
+          <Annotation Term="OData.Description" String="A virtual or software-based partition of a computer system"/>
+        </Member>
+      </EnumType>
+
+      <!-- These are all supported LED statuses. -->
+      <EnumType Name="IndicatorLED">
+        <Member Name="Unknown">
+          <Annotation Term="OData.Description" String="The state of the Indicator LED cannot be determined."/>
+        </Member>
+        <Member Name="Lit">
+          <Annotation Term="OData.Description" String="The Indicator LED is lit."/>
+        </Member>
+        <Member Name="Blinking">
+          <Annotation Term="OData.Description" String="The Indicator LED is blinking."/>
+        </Member>
+        <Member Name="Off">
+          <Annotation Term="OData.Description" String="The Indicator LED is off."/>
+        </Member>
+      </EnumType>
+
+      <EnumType Name="PowerState">
+        <Member Name="On"/>
+        <Member Name="Off"/>
+        <Member Name="Unknown"/>
+        <Member Name="Reset"/>
+      </EnumType>
+
+      <ComplexType Name="Boot">
+        <Property Name="BootSourceOverrideTarget" Type="ComputerSystem.BootSource">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/ReadWrite"/>
+          <Annotation Term="OData.Description" String="The current boot source to be used at next boot instead of the normal boot device, if BootSourceOverrideEnabled is true."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the source to boot the system from, overriding the normal boot order.  The value of this property shall be one of the values in the BootSourceOverrideSupported of this resource."/>
+        </Property>
+        <Property Name="BootSourceOverrideSupported" Type="Collection(ComputerSystem.BootSourceSupported)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.LongDescription" String="The values of this array shall be properties that shall contain the sources from which this system can be booted, overriding the normal boot order. Pxe indicates to PXE boot from the primary NIC; Floppy, Cd, Usb, Hdd indicates to boot from their devices respectively.  BiosSetup indicates to boot into the native BIOS screen setup.  Utilities &amp; Diags indicates to boot from the local utilities or diags partitions and UefiTarget indicates to boot from the UEFI device path found in UefiTargetBootSourceOverride."/>
+        </Property>
+        <Property Name="BootSourceOverrideEnabled" Type="ComputerSystem.BootSourceOverrideEnabled">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/ReadWrite"/>
+          <Annotation Term="OData.Description" String="Describes the state of the Boot Source Override feature"/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be Once if this is a one time boot override and Continuous if this selection should remain active until cancelled."/>
+        </Property>
+        <Property Name="UefiTargetBootSourceOverrideSupported" Type="Collection(Edm.String)" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="An arrary of the valid UEFI targets available to the Boot Source Override feature. These values can be used in conjunction with BootSourceOverrideTarget (set to UefiTarget) and UefiTargetBootSourceOverride to select a specifc UEFI device for booting."/>
+          <Annotation Term="OData.LongDescription" String="The values of this array shall be properties that shall contain the UEFI boot target sources from which this system can be booted, overriding the normal boot order.  BootSourceOverrideEnabled = Continuous is not supported for Uefi Boot Source Override as this setting is defined in UEFI as a one time boot only."/>
+        </Property>
+        <Property Name="UefiTargetBootSourceOverride" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/ReadWrite"/>
+          <Annotation Term="OData.Description" String="This property is the Uefi Device Path of the device to boot from when BootSourceOverrideSupported is UefiTarget."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the UEFI device path of the override boot target.  The value of this property is only valid if BootSourceOverride is equal to the value UefiTarget."/>
+        </Property>
+        <Annotation Term="OData.Description" String="This object contains the boot information for the current resource."/>
+      </ComplexType>
+
+      <EnumType Name="BootSource">
+        <Member Name="None">
+          <Annotation Term="OData.Description" String="Boot from the normal boot device"/>
+        </Member>
+        <Member Name="Pxe">
+          <Annotation Term="OData.Description" String="Boot from the Pre-Boot EXecution (PXE) environment"/>
+        </Member>
+        <Member Name="Floppy">
+          <Annotation Term="OData.Description" String="Boot from the floppy disk drive"/>
+        </Member>
+        <Member Name="Cd">
+          <Annotation Term="OData.Description" String="Boot from the CD/DVD disc"/>
+        </Member>
+        <Member Name="Usb">
+          <Annotation Term="OData.Description" String="Boot from a USB device as specified by the system BIOS"/>
+        </Member>
+        <Member Name="Hdd">
+          <Annotation Term="OData.Description" String="Boot from a hard drive"/>
+        </Member>
+        <Member Name="BiosSetup">
+          <Annotation Term="OData.Description" String="Boot to the BIOS Setup Utility"/>
+        </Member>
+        <Member Name="Utilities">
+          <Annotation Term="OData.Description" String="Boot the manufacturer's Utilities program(s)"/>
+        </Member>
+        <Member Name="Diags">
+          <Annotation Term="OData.Description" String="Boot the manufacturer's Diagnostics program"/>
+        </Member>
+        <Member Name="UefiShell">
+          <Annotation Term="OData.Description" String="Boot to the UEFI Shell"/>
+        </Member>
+        <Member Name="UefiTarget">
+          <Annotation Term="OData.Description" String="Boot to the UEFI Device specified in the UefiTargetBootSourceOverride property"/>
+        </Member>
+      </EnumType>
+
+      <!-- This enumeration has the same members as BootSource enumeration, but different definition for the members -->
+      <EnumType Name="BootSourceSupported">
+        <Member Name="None">
+          <Annotation Term="OData.Description" String="This system does not support any Boot Source Override targets"/>
+        </Member>
+        <Member Name="Pxe">
+          <Annotation Term="OData.Description" String="This system supports PXE as a Boot Source Override target"/>
+        </Member>
+        <Member Name="Floppy">
+          <Annotation Term="OData.Description" String="This system supports a Floppy disk as a Boot Source Override target"/>
+        </Member>
+        <Member Name="Cd">
+          <Annotation Term="OData.Description" String="This system supports a CD/DVD disc as a Boot Source Override target"/>
+        </Member>
+        <Member Name="Usb">
+          <Annotation Term="OData.Description" String="This system supports a USB device as a Boot Source Override target"/>
+        </Member>
+        <Member Name="Hdd">
+          <Annotation Term="OData.Description" String="This system supports a hard disk as a Boot Source Override target"/>
+        </Member>
+        <Member Name="BiosSetup">
+          <Annotation Term="OData.Description" String="This system supports BIOS Setup as a Boot Source Override target"/>
+        </Member>
+        <Member Name="Utilities">
+          <Annotation Term="OData.Description" String="This system supports the manufacturer's Utilities program(s) as a Boot Source Override target"/>
+        </Member>
+        <Member Name="Diags">
+          <Annotation Term="OData.Description" String="This system supports the manufacturer's Diagnostics program as a Boot Source Override target"/>
+        </Member>
+        <Member Name="UefiShell">
+          <Annotation Term="OData.Description" String="This system supports the UEFI Shell as a Boot Source Override target"/>
+        </Member>
+        <Member Name="UefiTarget">
+          <Annotation Term="OData.Description" String="This system supports a UEFI Device, specified in the UefiTargetBootSourceOverride property, as a Boot Source Override target"/>
+        </Member>
+      </EnumType>
+
+      <EnumType Name="BootSourceOverrideEnabled">
+        <Member Name="Disabled">
+          <Annotation Term="OData.Description" String="The system will boot as normal"/>
+        </Member>
+        <Member Name="Once">
+          <Annotation Term="OData.Description" String="On its next boot cycle, the system will boot (one time) to the Boot Source Override Target."/>
+        </Member>
+        <Member Name="Continuous">
+          <Annotation Term="OData.Description" String="The system will boot to the target specified in the BootSourceOverrideTarget until this property is set to Disabled."/>
+        </Member>
+      </EnumType>
+
+      <ComplexType Name="Bios">
+        <Annotation Term="DMTF.DynamicPropertyPatterns">
+          <Collection>
+            <Record>
+              <PropertyValue Property="Pattern" String="\\.[A-Za-z0-9]+$"/>
+              <PropertyValue Property="Type" String="Edm.String"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Property Name="Current" Type="Firmware.FWVersion" Nullable="false"/>
+      </ComplexType>
+
+      <ComplexType Name="Processors">
+        <Property Name="Count" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The number of processors in the system."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the number of central processors in the system."/>
+          <Annotation Term="Validation.Minimum" Int="0" />
+        </Property>
+        <Property Name="ProcessorFamily" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The processor family for the processor in this system."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the processor family for the central processors in the system, per the description in Table 22 of the SMBIOS Specification DSP0134 2.8 or later."/>
+        </Property>
+        <Property Name="Status" Type="Resource.Status"  Nullable="false"/>
+        <Annotation Term="OData.Description" String="This object describes the central processors of the system in general detail."/>
+      </ComplexType>
+
+      <ComplexType Name="Memory">
+        <Property Name="TotalSystemMemoryGB" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the total amount of memory in the system measured in GB."/>
+          <Annotation Term="OData.LongDescription" String="This property shall contain the amount of total system general purpose memory as measured in gigabytes."/>
+          <Annotation Term="Validation.Minimum" Int="0" />
+        </Property>
+        <Property Name="Status" Type="Resource.Status"  Nullable="false"/>
+        <Annotation Term="OData.Description" String="This object describes the central memory of the system in general detail."/>
+      </ComplexType>
+
+      <!--Consider aligning with IPAddresses?-->
+      <ComplexType Name="HostCorrelation">
+        <Property Name="IPAddress" Type="Collection(ComputerSystem.IPAddress)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The IP address(es) associated with this system"/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain an array of IP addresses in a format as defined in RFC5737 or RFC5952."/>
+        </Property>
+        <Property Name="HostMACAddress" Type="Collection(ComputerSystem.MacAddress)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The network MAC address(es) associated with this system"/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain an array of MAC addresses in MAC-48 identifier format."/>
+        </Property>
+        <Property Name="HostName" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The Host Name of this system"/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the host name without any domain information."/>
+        </Property>
+        <Property Name="HostFQDN" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The Fully Qualified Domain Name (FQDN) of this system"/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the fully qualified domain name for the host"/>
+        </Property>
+      </ComplexType>
+
+      <!--Strongly typed property for IPAddress-->
+      <TypeDefinition Name="IPAddress" UnderlyingType="Edm.String"/>
+
+      <!--Strongly typed property for MacAddress-->
+      <TypeDefinition Name="MacAddress" UnderlyingType="Edm.String"/>
+
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,16 @@
+#!/bin/bash
+rm -rf aclocal.m4 autom4te.cache configure compile autom4te.cache depcomp missing install-sh config.status config.log Makefile.in config.guess config.sub libtool ltmain.sh m4 Makefile config.h.in
+
+rm -rf `find . -name .deps`
+
+rm -rf `find . -name .libs`
+
+rm -rf `find . -name Makefile.in`
+
+rm -rf `find . -name Makefile`
+
+rm -f ./prefix/var/log/*
+
+rm -f ./prefix/var/run/*
+
+rm -rf ./lib

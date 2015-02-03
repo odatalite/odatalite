@@ -1,0 +1,137 @@
+/* src/config.h.in.  Generated from configure.ac by autoheader.  */
+
+/* debug enabled */
+#undef CONFIG_DEBUG
+
+/* datarootdir */
+#undef DATAROOTDIR
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
+/* Define to 1 if you have the <expat.h> header file. */
+#undef HAVE_EXPAT_H
+
+/* Define to 1 if you have the `getpwuid_r' function. */
+#undef HAVE_GETPWUID_R
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the `expat' library (-lexpat). */
+#undef HAVE_LIBEXPAT
+
+/* Define to 1 if you have the `pam' library (-lpam). */
+#undef HAVE_LIBPAM
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the <netdb.h> header file. */
+#undef HAVE_NETDB_H
+
+/* Define to 1 if you have the <openssl/crypto.h> header file. */
+#undef HAVE_OPENSSL_CRYPTO_H
+
+/* Define to 1 if you have the <openssl/err.h> header file. */
+#undef HAVE_OPENSSL_ERR_H
+
+/* Define to 1 if you have the <openssl/pem.h> header file. */
+#undef HAVE_OPENSSL_PEM_H
+
+/* Define to 1 if you have the <openssl/ssl.h> header file. */
+#undef HAVE_OPENSSL_SSL_H
+
+/* Define to 1 if you have the <openssl/x509.h> header file. */
+#undef HAVE_OPENSSL_X509_H
+
+/* Define to 1 if you have the <security/pam_appl.h> header file. */
+#undef HAVE_SECURITY_PAM_APPL_H
+
+/* Define to 1 if you have the `socket' function. */
+#undef HAVE_SOCKET
+
+/* Define to 1 if you have the <stddef.h> header file. */
+#undef HAVE_STDDEF_H
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the `strcasecmp' function. */
+#undef HAVE_STRCASECMP
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the `strncasecmp' function. */
+#undef HAVE_STRNCASECMP
+
+/* Define to 1 if you have the `strstr' function. */
+#undef HAVE_STRSTR
+
+/* Define to 1 if you have the `strtoll' function. */
+#undef HAVE_STRTOLL
+
+/* Define to 1 if you have the `strtoull' function. */
+#undef HAVE_STRTOULL
+
+/* Define to 1 if you have the <sys/socket.h> header file. */
+#undef HAVE_SYS_SOCKET_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to 1 if you have the `vsnprintf' function. */
+#undef HAVE_VSNPRINTF
+
+/* libdir */
+#undef LIBDIR
+
+/* localstatedir */
+#undef LOCALSTATEDIR
+
+/* Define to the sub-directory in which libtool stores uninstalled libraries.
+   */
+#undef LT_OBJDIR
+
+/* Define to 1 if your C compiler doesn't accept -c and -o together. */
+#undef NO_MINUS_C_MINUS_O
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+/* runstatedir */
+#undef RUNSTATEDIR
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* sysconfdir */
+#undef SYSCONFDIR
+
+/* Define to `unsigned int' if <sys/types.h> does not define. */
+#undef size_t

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+
+  <edmx:DataServices>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Chipwise">
+
+      <!--Used for Chipwise-specific extensions to ComputerSystem-->
+      <ComplexType Name="ComputerSystem">
+        <Property Name="Style" Type="Chipwise.Style"/>
+      </ComplexType>
+
+      <EnumType Name="Style">
+        <Member Name="Standard"/>
+        <Member Name="Professional"/>
+        <Member Name="Executive"/>
+      </EnumType>
+      
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,33 @@
+
+(*) HTTP Headers:
+
+    (*) ETag/If-Match/If-None-Match headers
+
+        http://en.wikipedia.org/wiki/HTTP_ETag
+
+    (*) OData-Isolation:snapshot - next link
+
+    (*) Prefer headers (safe to ignore)
+
+    (*) Preference odata.callback:respond-async
+
+(*) Creating an entity:
+
+    (*) Response must include a 'Location' header with the URL.
+    (*) Must return '201 created' or '204 no content' (if return=minimal)
+
+(*) Inline vs. JSON parameter lists
+
+(*) The protocol specification defines minimal conformance.
+
+Functions & Actions
+===================
+
+--------------------------------------------------------------------------
+                        Functions               Actions
+--------------------------------------------------------------------------
+HTTP Method             GET                     POST
+Name contains a '.'     Yes                     Yes
+Side effects            No                      Yes
+Parameters passing      As URL                  As JSON Payload
+Composable              Yes                     No

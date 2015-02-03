@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OData"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/DMTFExtensions">
+    <edmx:Include Namespace="DMTFExtensions.0.9.2" Alias="DMTF"/>
+    <edmx:Include Namespace="Validation.0.9.2" Alias="Validation"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/EventService">
+    <edmx:Include Namespace="EventService.0.9.2" Alias="EventService"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/AccountService">
+    <edmx:Include Namespace="AccountService.0.9.2" Alias="AccountService"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/ComputerSystem">
+    <edmx:Include Namespace="ComputerSystem.0.9.2" Alias="ComputerSystem"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Chassis">
+    <edmx:Include Namespace="Chassis.0.9.2" Alias="Chassis"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Manager">
+    <edmx:Include Namespace="Managers.0.9.2" Alias="Manager"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/TaskService">
+    <edmx:Include Namespace="TaskService.0.9.2" Alias="TaskService"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Session">
+    <edmx:Include Namespace="Session.0.9.2" Alias="Session"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Messages">
+    <edmx:Include Namespace="Messages.0.9.2" Alias="Messages"/>
+  </edmx:Reference>
+
+  <edmx:DataServices>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="ServiceRoot.0.9.2" Alias="ServiceRoot">
+
+      <EntityContainer Name="ServiceContainer">
+        <Singleton Name="Service" Type="ServiceRoot.ServiceRoot"/>
+      </EntityContainer>
+
+      <!-- This object contains top-level properties of the SPMA service. -->
+      <EntityType Name="ServiceRoot" BaseType="Resource.Resource">
+        <Annotation Term="OData.Description" String="This object represents the root SPMA service."/>
+        <Annotation Term="OData.LongDescription" String="This object represents the root SPMA service.  All values for resources described by this schema shall comply to the requirements as described in the SPMA specification."/>
+        <Property Name="Time" Type="Edm.DateTimeOffset">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The current time as reported by the owner of this SPMA Service"/>
+          <Annotation Term="OData.LongDescription" String="The value of this string shall represent the time of the SPMA service. "/>
+        </Property>
+        <Property Name="ServiceVersion" Type="Edm.String" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The version of the SPMA service"/>
+          <Annotation Term="OData.LongDescription" String="The value of this string shall represent the version of the SPMA service.  The format of this string shall be of the format majorversion.minorversion.errata in compliance with Protocol Version section of the SPMA specification. "/>
+          <Annotation Term="Validation.Pattern" String="^\\d+\\.\\d+\\.\\d+$"/>
+        </Property>
+        <Property Name="UUID" Type="ServiceRoot.UUID">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="Unique identifier for a service instance.  This value should be an exact match of the UUID value returned in a 200OK from an SSDP M-SEARCH request during discovery."/>
+          <Annotation Term="OData.LongDescription" String="The value of this string shall represent the id of the SPMA service instance.  The format of this string shall be a 32-byte value in the form 8-4-4-4-12.  This value shall be an exact match of the UUID value returned in a 200OK from an SSDP M-SEARCH request during discovery."/>
+        </Property>
+        <Property Name="Links" Type="ServiceRoot.ServiceRootLinks" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The links object contains the links to other resources that are related to this resource."/>
+          <Annotation Term="DMTF.Required"/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="ServiceRootLinks">
+        <NavigationProperty Name="Systems" Type="Collection(ComputerSystem.ComputerSystem)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is a link to a collection of Systems."/>
+          <Annotation Term="OData.LongDescription" String="This object shall only contain a reference to a collection of resources that comply to the Systems schema.  The last segment of the path shall be 'Systems'."/>
+        </NavigationProperty>
+        <NavigationProperty Name="Chassis" Type="Collection(Chassis.Chassis)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is a link to a collection of Chassis."/>
+          <Annotation Term="OData.LongDescription" String="This object shall only contain a reference to a collection of resources that comply to the Chassis schema. The last segment of the path shall be 'Chassis'."/>
+        </NavigationProperty>
+        <NavigationProperty Name="Managers" Type="Collection(Manager.Manager)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is a link to a collection of Managers."/>
+          <Annotation Term="OData.LongDescription" String="This object shall only contain a reference to a collection of resources that comply to the Managers schema.  The last segment of the path shall be 'Managers'."/>
+        </NavigationProperty>
+        <NavigationProperty Name="Tasks" Type="Collection(TaskService.TaskService)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is a link to the Task Service."/>
+          <Annotation Term="OData.LongDescription" String="The classes structure shall only contain a reference to a resource that complies to the TaskService schema.  The last segment of the path shall be 'Tasks'"/>
+        </NavigationProperty>
+        <NavigationProperty Name="AccountService" Type="AccountService.AccountService">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is a link to the Account Service."/>
+          <Annotation Term="OData.LongDescription" String="The classes structure shall only contain a reference to a resource that complies to the AccountService schema.  The last segment of the path shall be 'AccountService'"/>
+        </NavigationProperty>
+        <NavigationProperty Name="EventService" Type="EventService.EventService">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is a link to the EventService."/>
+          <Annotation Term="OData.LongDescription" String="The classes structure shall only contain a reference to a resource that complies to the EventService schema.  The last segment of the path shall be 'EventService'."/>
+        </NavigationProperty>
+        <NavigationProperty Name="Registries" Type="Collection(Messages.MessageRegistry)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is a link to a collection of Registries."/>
+          <Annotation Term="OData.LongDescription" String="This object shall only contain a reference to a collection of resources that comply to the SchemaFile schema where the files are Registries.  The last segment of the path shall be 'Registries'."/>
+        </NavigationProperty>
+      </ComplexType>
+
+      <TypeDefinition Name="UUID" UnderlyingType="Edm.String">
+        <Annotation Term="Validation.Pattern" String="([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})"/>
+      </TypeDefinition>
+
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

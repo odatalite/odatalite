@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OData"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/DMTFExtensions">
+    <edmx:Include Namespace="DMTFExtensions.0.9.2" Alias="DMTF"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Messages">
+    <edmx:Include Namespace="Messages.0.9.2" Alias="Messages"/>
+  </edmx:Reference>
+
+  <edmx:DataServices>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Resource.0.9.2" Alias="Resource">
+
+      <EntityType Name="Resource" Abstract="true">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Nullable="false" Type="Edm.String"/>
+        <Property Name="Description" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="Provides a description of this resource and is used for commonality  in the schema definitions."/>
+          <Annotation Term="OData.LongDescription" String="This object represents the Description property.  All values for resources described by this schema shall comply to the requirements as described in the SPMA specification."/>
+        </Property>
+        <Property Name="Name" Type="Edm.String" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description"  String="The name of the resource or array element."/>
+          <Annotation Term="OData.LongDescription" String="This object represents the Name property.  All values for resources described by this schema shall comply to the requirements as described in the SPMA specification. The value of this string shall be of the format for the reserved word *Name*."/>
+          <Annotation Term="DMTF.Required"/>
+        </Property>
+        <Property Name="Oem" Type="Resource.Oem">
+          <Annotation Term="OData.Description" String="This is the manufacturer/provider specific extension moniker used to divide the Oem object into sections."/>
+          <Annotation Term="OData.LongDescription" String="The value of this string shall be of the format for the reserved word *Oem*."/>
+        </Property>
+        <Property Name="Modified" Type="Edm.DateTimeOffset" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The date-time stamp that the object was last modified."/>
+          <Annotation Term="OData.LongDescription" String="This object represents the Modified property.  All values for resources described by this schema shall comply to the requirements as described in the SPMA specification. The value of this string shall be of the format for the reserved word *Modified*."/>
+        </Property>
+        <Property Name="Status" Type="Resource.Status"/>
+      </EntityType>
+
+      <!--Complex type that serves as a "property bag" for OEM properties-->
+      <ComplexType Name="Oem">
+        <Annotation Term="OData.Description" String="Oem extension object."/>
+        <Annotation Term="OData.LongDescription" String="This object represents the Oem property.  All values for resources described by this schema shall comply to the requirements as described in the SPMA specification."/>
+      </ComplexType>
+
+      <!--This object represents the standard status structure for resources.-->
+      <ComplexType Name="Status">
+        <Property Name="State" Type="Resource.State">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This indicates the known state of the resource, such as if it is enabled."/>
+          <Annotation Term="OData.LongDescription" String="This property shall represent if this component is available or not and why.  Enabled indicates the resource is available.  Disabled indicates the resource has been intentionally made unavailable but it can be enabled.  Offline indicates the resource is unavailable intentionally and requires action to be made available.  InTest indicates that the component is undergoing testing.  Starting indicates that the resource is on its way to becoming available.  Absent indicates the resources is physically unavailable."/>
+        </Property>
+        <Property Name="HealthRollup" Type="Resource.Health">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This represents the overall health state from the view of this resource."/>
+          <Annotation Term="OData.LongDescription" String="This property shall represent the HealthState of the resource and its dependent resources.  The values shall conform to those defined in the SPMA specification."/>
+        </Property>
+        <Property Name="Health" Type="Resource.Health">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This represents the health state of this resource in the absence of its dependent resources."/>
+          <Annotation Term="OData.LongDescription" String="This property shall represent the HealthState of the resource without considering its dependent resources. The values shall conform to those defined in the SPMA specification."/>
+        </Property>
+        <Property Name="Oem" Type="Resource.Oem" Nullable="false"/>
+      </ComplexType>
+
+      <!--This indicates the known state of the resource, such as if it is enabled.-->
+      <EnumType Name="State">
+        <Member Name="Enabled">
+          <Annotation Term="OData.Description" String="This function or resource has been enabled"/>
+        </Member>
+        <Member Name="Disabled">
+          <Annotation Term="OData.Description" String="This function or resource has been disabled"/>
+        </Member>
+        <Member Name="Offline">
+          <Annotation Term="OData.Description" String="This function or resource is enabled, but currently unavailable"/>
+        </Member>
+        <Member Name="InTest">
+          <Annotation Term="OData.Description" String="This function or resource is underdoing testing"/>
+        </Member>
+        <Member Name="Starting">
+          <Annotation Term="OData.Description" String="This function or resource is starting"/>
+        </Member>
+        <Member Name="Absent">
+          <Annotation Term="OData.Description" String="This function or resource is not installed"/>
+        </Member>
+      </EnumType>
+
+      <!--This represents the state of the health of a resource.-->
+      <EnumType Name="Health">
+        <Member Name="OK">
+          <Annotation Term="OData.Description" String="Normal"/>
+        </Member>
+        <Member Name="Warning">
+          <Annotation Term="OData.Description" String="A condition exists that requires attention"/>
+        </Member>
+        <Member Name="Critical">
+          <Annotation Term="OData.Description" String="A critical condition exists that requires immediate attention"/>
+        </Member>
+      </EnumType>
+
+      <TypeDefinition Name="SettingsRef" UnderlyingType="Edm.String">
+        <Annotation Term="OData.IsUrl"/>
+      </TypeDefinition>
+
+      <!-- This represents the objects used for Settings in the SPMA specification. -->
+      <ComplexType Name="Settings">
+        <Property Name="href" Type="Resource.SettingsRef"  Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="Reference to the resource the client may PUT/PATCH to in order to change this resource."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the URI of the resource to which a client must do a PUT or PATCh in order to modify this resource."/>
+        </Property>
+      </ComplexType>
+
+      <!-- This represents the objects used for SettingsResult in the SPMA specification. -->
+      <ComplexType Name="SettingsResult">
+        <Property Name="Operation" Type="Resource.SettingsOperation"  Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="Last operation detail."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall indicate the results of the settings application.  The value SettingsApply shall be used to indicate the Settings were applied during the normal course of operations, such as what happens during a reboot."/>
+        </Property>
+        <Property Name="Time" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="Indicates the time the settings were applied."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall indicate the time that the settings object was applied to the resource."/>
+        </Property>
+        <Property Name="ETag" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The ETag of the resource to which the settings were applied, after the application."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the ETag of the resource to which the settings were applied, after the application.  This is here so that the client can check it against the ETag of the current resource to see if any other changes have also happened to the resource."/>
+        </Property>
+        <Property Name="Messages" Type="Collection(Messages.SettingsMessage)">
+          <Annotation Term="OData.Description" String="Array of message entries"/>
+        </Property>
+      </ComplexType>
+
+      <EnumType Name="SettingsOperation">
+        <Member Name="SettingsApply"/>
+      </EnumType>
+
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

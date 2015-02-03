@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OData"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/DMTFExtensions">
+    <edmx:Include Namespace="DMTFExtensions.0.9.2" Alias="DMTF"/>
+  </edmx:Reference>
+  
+  <edmx:DataServices>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Firmware.0.9.2" Alias="Firmware">
+
+      <!-- This is the schema definition for the Firmware Version. -->
+      <ComplexType Name="FirmwareRevision">
+        <Annotation Term="OData.Description" String="This is the schema definition for the Firmware Version.  It is used as part of other schema."/>
+        <Annotation Term="OData.LongDescription" String="This resource shall be used to represent the version of firmware for an SPMA implementation."/>
+        <Property Name="Current" Type="Firmware.FWVersion">
+          <Annotation Term="DMTF.Required"/>
+        </Property>
+      </ComplexType>
+
+      <ComplexType Name="FWVersion">
+        <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+        <Annotation Term="OData.Description" String="This object contains information about the version of a firmware image."/>
+        <Property Name="VersionString" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This string represents the version of the firmware image."/>
+          <Annotation Term="OData.LongDescription" String="This property shall represent the manufacturer version of the firmware image."/>
+        </Property>
+      </ComplexType>
+
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

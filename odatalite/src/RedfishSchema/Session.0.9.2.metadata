@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OData"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Resource">
+    <edmx:Include Namespace="Resource.1.0.0" Alias="Resource"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/LogEntry">
+    <edmx:Include Namespace="LogEntry.1.0.0" Alias="LogEntry"/>
+  </edmx:Reference>
+
+  <edmx:DataServices>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Session.1.0.0" Alias="Session">
+
+      <!-- This is the schema definition for the Session resource.  It represents the properties for the session with an SPMA Service. -->
+      <EntityType Name="Session" BaseType="Resource.Resource">
+        <Annotation Term="Core.Description" String="This is the schema definition for the Session resource.  It represents the properties for the session with an SPMA Service."/>
+        <Annotation Term="Core.LongDescription" String="This resource shall be used to represent a session for an SPMA implementation."/>
+        <Property Name="UserName" Type="Edm.String">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="Core.Description" String="The UserName for the account for this session."/>
+          <Annotation Term="Core.LongDescription" String="The value of this property shall be the UserName that matches a registered account identified by a ManagerAccount resource registered with the Account Service."/>
+        </Property>
+      </EntityType>
+
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

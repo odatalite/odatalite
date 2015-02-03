@@ -1,0 +1,3 @@
+Here is a list of current server limitations:
+
+    (*) No SSL implementation yet

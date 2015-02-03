@@ -1,0 +1,48 @@
+
+    (?) What the difference between weak and strong ETags?
+
+    (?) How do we represent enumeration types?
+
+    (?) How do we represent type definitions?
+
+    (?) Do we need to worry about the distincition between edit and read URLs?
+
+    (?) How to edit-links work?
+
+    (?) Which OData 4.0 clients can we test with?
+
+    (?) Which preferences may the server safely ignore?
+
+    (?) What is a delta-link?
+
+    (?) What is a delta response? delta links?
+
+    (?) When creating entity, what is ???@odata.bind property for (for
+        establishing a link to existing object?)
+
+    (?) What is deep insert for? Creating related entities right?
+
+    (?) When updating an entity which of these is allowed:
+
+        (?) Related entities (inline)
+        (?) Binding information for navigation properties.
+
+    (?) How is PUT different than PATCH (does it replace the whole object).
+
+        Is support for PUT optional?
+
+    (?) Expand feature?
+
+    (?) What is streaming? What is a stream property? Stream value? Edm.Stream
+
+    (?) How to bind operations (actions/functions)
+
+    (?) Do we need to support batch requests?
+
+    (?) What is a change set and how is it related to batch operations?
+
+    (?) What's an upsert? 
+    (A) Supports creating an entity by invoking PUT/PATCH on non-existent entity.
+
+    (?) How to next links work? @odata.nextLink:  "@odata.nextLink": "serviceRoot/People?%24skiptoken=8
+

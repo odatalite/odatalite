@@ -1,0 +1,53 @@
+{
+    "@odata.context":"http://services.odata.org/V4/TripPinService/$metadata#Me",
+    "@odata.type":"#Microsoft.OData.SampleService.Models.TripPin.Person",
+    "@odata.id":"http://services.odata.org/V4/TripPinService/Me",
+    "@odata.etag":"W/\"08D195B3BD1F9BEA\"",
+    "@odata.editLink":"http://services.odata.org/V4/TripPinService/Me",
+    "UserName":"aprilcline",
+    "FirstName":"April",
+    "LastName":"Cline",
+    "Emails@odata.type":"#Collection(String)",
+    "Emails":["April@example.com",
+    "April@contoso.com"],
+    "AddressInfo@odata.type":"#Collection(Microsoft.OData.SampleService.Models.TripPin.Location)",
+    "AddressInfo":[
+    {
+        "@odata.type":"#Microsoft.OData.SampleService.Models.TripPin.Location",
+        "Address":"P.O. Box 555",
+        "City":
+        {
+            "@odata.type":"#Microsoft.OData.SampleService.Models.TripPin.City",
+            "CountryRegion":"United States",
+            "Name":"Lander",
+            "Region":"WY"
+        }
+
+    }
+    ],
+    "Gender@odata.type":"#Microsoft.OData.SampleService.Models.TripPin.PersonGender",
+    "Gender":"Female",
+    "Concurrency@odata.type":"#Int64",
+    "Concurrency":635453621640600554,
+    "Friends@odata.associationLink":"http://services.odata.org/V4/TripPinService/Me/Friends/$ref",
+    "Friends@odata.navigationLink":"http://services.odata.org/V4/TripPinService/Me/Friends",
+    "Trips@odata.associationLink":"http://services.odata.org/V4/TripPinService/Me/Trips/$ref",
+    "Trips@odata.navigationLink":"http://services.odata.org/V4/TripPinService/Me/Trips",
+    "Photo@odata.associationLink":"http://services.odata.org/V4/TripPinService/Me/Photo/$ref",
+    "Photo@odata.navigationLink":"http://services.odata.org/V4/TripPinService/Me/Photo",
+    "#Microsoft.OData.SampleService.Models.TripPin.ShareTrip":
+    {
+        "title":"Microsoft.OData.SampleService.Models.TripPin.ShareTrip",
+        "target":"http://services.odata.org/V4/TripPinService/Me/Microsoft.OData.SampleService.Models.TripPin.ShareTrip"
+    },
+    "#Microsoft.OData.SampleService.Models.TripPin.GetFavoriteAirline":
+    {
+    "title":"Microsoft.OData.SampleService.Models.TripPin.GetFavoriteAirline",
+    "target":"http://services.odata.org/V4/TripPinService/Me/Microsoft.OData.SampleService.Models.TripPin.GetFavoriteAirline"
+    },
+    "#Microsoft.OData.SampleService.Models.TripPin.GetFriendsTrips":
+    {
+        "title":"Microsoft.OData.SampleService.Models.TripPin.GetFriendsTrips",
+        "target":"http://services.odata.org/V4/TripPinService/Me/Microsoft.OData.SampleService.Models.TripPin.GetFriendsTrips"
+    }
+}

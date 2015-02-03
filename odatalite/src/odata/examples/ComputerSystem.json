@@ -1,0 +1,30 @@
+{
+    "@odata.context": "http://localhost:6500/$metadata#ComputerSystems/$entity",
+    "Name": "My Computer System",
+    "Modified": "2012-03-07T14:44",
+    "Type": "ComputerSystem.1.0.0",
+    "SystemType": "Physical",
+    "AssetTag": "free form asset tag",
+    "Manufacturer": "Manufacturer Name",
+    "Model": "Model Name",
+    "SKU": "",
+    "SerialNumber": "2M220100SL",
+    "Version": "",
+    "PartNumber": "",
+    "VirtualSerialNumber": null,
+    "UUID": "00000000-0000-0000-0000-000000000001",
+    "BIOSPOSTCode": 42,
+    "IndicatorLED": "Off",
+    "Power": "On",
+    "Boot": {
+        "BootSourceOverrideTarget": "Pxe",
+        "BootSourceOverrideSupported": [
+            "UefiShell",
+            "Hdd"
+        ],
+        "BootSourceOverrideEnabled": "Once",
+        "UefiTargetBootSourceOverride": "uefi device path"
+    },
+    "Chassis@odata.navigationLink": "http://localhost:6500/ComputerSystems(1)/Chassis",
+    "ManagedBy@odata.navigationLink": "http://localhost:6500/ComputerSystems(1)/ManagedBy",
+}

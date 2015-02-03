@@ -1,0 +1,53 @@
+{
+    "@odata.context": "http://service/rest/v1/$metadata#NetworkServices",
+    "value": [
+        {
+            "@odata.editLink": "NetworkServices/1",
+            "Name": "Manager Network Service",
+            "Modified": "2014-03-07T14:44",
+            "Description": "Manager Network Service Status",
+            "HostName": "mymanager",
+            "FQDN": "mymanager.mydomain.com",
+            "SessionTimeoutMinutes": 0,
+            "HTTP": {
+                "Enabled": true,
+                "Port": 80
+            },
+            "HTTPS": {
+                "Enabled": true,
+                "Port": 443
+            },
+            "SNMP": {
+                "Enabled": true,
+                "Port": 161
+            },
+            "VirtualMedia": {
+                "Enabled": true,
+                "Port": 17988
+            },
+            "Telnet": {
+                "Enabled": true,
+                "Port": 23
+            },
+            "IPMI": {
+                "Enabled": true,
+                "Port": 623
+            },
+            "SSH": {
+                "Enabled": true,
+                "Port": 22
+            },
+            "KVMIP": {
+                "Enabled": true,
+                "Port": 5288
+            },
+            "SSDP": {
+                "NotifyMulticastIntervalSeconds": 600,
+                "NotifyTTL": 5,
+                "NotifyIPv6Scope": "Site",
+                "Enabled": true,
+                "Port": 623
+            }
+        }
+    ]
+}

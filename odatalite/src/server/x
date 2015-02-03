@@ -1,0 +1,4 @@
+#!/bin/bash
+#./phitd -l VERBOSE -S -k -D
+#./phitd -l VERBOSE -S -k -a mikbras -g '*' -g '*' $*
+./phitd -l VERBOSE -S -k -a mikbras -i $*

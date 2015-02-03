@@ -1,0 +1,10 @@
+{
+   "odata.metadata":"http://odataservices.azurewebsites.net/OData/OData.svc/$metadata#Categories/@Element",
+   "odata.type":"ODataDemo.Category",
+   "odata.id":"http://odataservices.azurewebsites.net/OData/OData.svc/Categories(0)",
+   "odata.editLink":"Categories(0)",
+   "Products@odata.navigationLinkUrl":"Categories(0)/Products",
+   "Products@odata.associationLinkUrl":"Categories(0)/$links/Products",
+   "ID":0,
+   "Name":"Food"
+}

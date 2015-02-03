@@ -1,0 +1,28 @@
+POST odata/Gadgets
+OData-Version: 4.0
+Accept: application/json
+TE: trailers, chunked
+Content-Length: 444
+
+{
+  "@odata.type" : "Microsoft.OData.SampleService.Models.TripPin.Person",
+  "UserName": "teresa",
+  "FirstName" : "Teresa",
+  "LastName" : "Gilbert",
+  "Gender" : "Female",
+  "Emails" : [
+    "teresa@example.com", 
+    "teresa@contoso.com"
+  ],
+  "AddressInfo" : [
+    {
+      "Address" : "1 Suffolk Ln.",
+      "City" :
+      {
+        "CountryRegion" : "United States",
+        "Name" : "Boise",
+        "Region" : "ID"
+      }
+    }
+  ] 
+}

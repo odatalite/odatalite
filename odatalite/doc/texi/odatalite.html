@@ -1,0 +1,1204 @@
+<html lang="en">
+<head>
+<title>ODataLite</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="ODataLite">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="top" href="#Top">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<h1 class="settitle">ODataLite</h1>
+<div class="contents">
+<h2>Table of Contents</h2>
+<ul>
+<li><a name="toc_TOC0" href="#TOC0">1 Introduction</a>
+<ul>
+<li><a href="#TOC1">1.1 What is ODataLite?</a>
+<li><a href="#TOC2">1.2 What does the ODataLite service do?</a>
+</li></ul>
+<li><a name="toc_TOC3" href="#TOC3">2 Building and Installing</a>
+<ul>
+<li><a href="#TOC4">2.1 Configuring ODataLite</a>
+<li><a href="#TOC5">2.2 Building ODataLite</a>
+<li><a href="#TOC6">2.3 Running the unit tests</a>
+<li><a href="#TOC7">2.4 Installing ODataLite</a>
+<li><a href="#TOC8">2.5 Layout of the ODataLite installation</a>
+<ul>
+<li><a href="#TOC9">2.5.1 The &lsquo;<samp><span class="samp">/opt/odatalite/share/phit</span></samp>&rsquo; directory</a>
+<li><a href="#TOC10">2.5.2 The &lsquo;<samp><span class="samp">/opt/odatalite/include</span></samp>&rsquo; directory</a>
+<li><a href="#TOC11">2.5.3 The &lsquo;<samp><span class="samp">/opt/odatalite/etc/phit</span></samp>&rsquo; directory</a>
+<li><a href="#TOC12">2.5.4 The &lsquo;<samp><span class="samp">/opt/odatalite/var/log</span></samp>&rsquo; directory</a>
+<li><a href="#TOC13">2.5.5 The &lsquo;<samp><span class="samp">/opt/odatalite/var/phitauth</span></samp>&rsquo; directory</a>
+<li><a href="#TOC14">2.5.6 The &lsquo;<samp><span class="samp">/opt/odatalite/var/run</span></samp>&rsquo; directory</a>
+<li><a href="#TOC15">2.5.7 The &lsquo;<samp><span class="samp">/opt/odatalite/bin</span></samp>&rsquo; directory</a>
+<li><a href="#TOC16">2.5.8 The &lsquo;<samp><span class="samp">/opt/odatalite/lib</span></samp>&rsquo; directory</a>
+</li></ul>
+</li></ul>
+<li><a name="toc_TOC17" href="#TOC17">3 Using the server</a>
+<ul>
+<li><a href="#TOC18">3.1 Printing the help message</a>
+<li><a href="#TOC19">3.2 Examing file locations</a>
+<li><a href="#TOC20">3.3 Starting the server</a>
+<li><a href="#TOC21">3.4 Stopping the server</a>
+<li><a href="#TOC22">3.5 Changing the logging level</a>
+<li><a href="#TOC23">3.6 Using a web browser to talk to the server</a>
+<li><a href="#TOC24">3.7 Sedning requests to the server</a>
+<ul>
+<li><a href="#TOC25">3.7.1 The &lsquo;<samp><span class="samp">phitcli</span></samp>&rsquo; tool</a>
+<li><a href="#TOC26">3.7.2 The &lsquo;<samp><span class="samp">olcli</span></samp>&rsquo; tool</a>
+</li></ul>
+</li></ul>
+<li><a name="toc_TOC27" href="#TOC27">4 Server Features</a>
+<ul>
+<li><a href="#TOC28">4.1 HTTP Basic Authentication</a>
+<li><a href="#TOC29">4.2 PAM (Pluggable Authentication Module)</a>
+<li><a href="#TOC30">4.3 Authorization Roles</a>
+</li></ul>
+<li><a name="toc_TOC31" href="#TOC31">5 Developing plugins</a>
+<li><a name="toc_TOC32" href="#TOC32">6 Developing OData providers</a>
+<ul>
+<li><a href="#TOC33">6.1 Implementing the entry point</a>
+<li><a href="#TOC34">6.2 The &lsquo;<samp><span class="samp">Unload</span></samp>&rsquo; method</a>
+<li><a href="#TOC35">6.3 Implementing the &lsquo;<samp><span class="samp">Get</span></samp>&rsquo; method</a>
+<li><a href="#TOC36">6.4 Registering the &lsquo;<samp><span class="samp">Widgets</span></samp>&rsquo; provider</a>
+<li><a href="#TOC37">6.5 Testing the provider</a>
+<li><a href="#TOC38">6.6 Providing Metadata</a>
+</li></ul>
+<li><a name="toc_TOC39" href="#TOC39">7 Development tips</a>
+<ul>
+<li><a href="#TOC40">7.1 Running PHIT from the source directory</a>
+<li><a href="#TOC41">7.2 Running PHIT in the foreground</a>
+<li><a href="#TOC42">7.3 Disabling authentication</a>
+<li><a href="#TOC43">7.4 Increasing the logging level</a>
+<li><a href="#TOC44">7.5 Logging to standard output</a>
+<li><a href="#TOC45">7.6 Logging socket I/O</a>
+<li><a href="#TOC46">7.7 Dump requests and responses to standard output</a>
+</li></ul>
+</li></ul>
+</div>
+
+
+
+<!-- ============================================================================= -->
+<!-- Introduction -->
+<!-- ============================================================================= -->
+<h2 class="chapter"><a name="TOC0"></a>1 Introduction</h2>
+
+<p>This guide explains how to get started with ODataLite. It explains how to:
+
+     <ul>
+<li>Build ODataLite
+<li>Install ODataLite
+<li>Configure ODataLite
+<li>Start and stop the server
+<li>Validate an installation
+<li>Develop OData providers
+</ul>
+
+<p>ODataLite is a plugin that runs under the PHIT web server (included as part of
+this distribution).
+
+<!-- ============================================================================= -->
+<h3 class="section"><a name="TOC1"></a>1.1 What is ODataLite?</h3>
+
+<p>ODataLite is a software service that implements a subset of the OData 4.0
+standard, described here:
+<a href="http://www.odata.org/documentation/odata-version-4-0">http://www.odata.org/documentation/odata-version-4-0</a>.  This stanard
+defines a protocol that is:
+
+     <ul>
+<li>REST-based - the protocol operations are based on HTTP methods. 
+<li>JSON-based - the protocol payload is represented using JSON. 
+</ul>
+
+<p>A key goal of ODataLite is to run on resource constrained systems. 
+Accordingly, ODataLite aims at minimal conformance as defined by the OData
+standard.  This standard lists several requirments of a minimally conformant
+implementation, but the main ODataLite limitations are as follows.
+
+     <ul>
+<li>Only supports the JSON format (no support for the Atom XML format). 
+<li>Only supports a subset of query options. 
+</ul>
+
+<p>This guide does not cover the OData standard. For a complete description of the
+OData protocol, please see <a href="http://www.odata.org">http://www.odata.org</a>.
+
+<!-- ============================================================================= -->
+<h3 class="section"><a name="TOC2"></a>1.2 What does the ODataLite service do?</h3>
+
+<p>The ODataLite service handles requests from clients. These requests utilize
+HTTP methods to perform the following operations:
+
+     <ul>
+<li>HTTP GET - Gets an entity set or invoke a function. 
+<li>HTTP POST - Creates an entity or invokes an action. 
+<li>HTTP PUT - Creates an entity. 
+<li>HTTP PATCH - Updates an entity. 
+<li>HTTP DELETE - Removes an entity. 
+</ul>
+
+<p>The server delegates these requests to OData providers. Developers may
+build new providers to handle these requests for a particular entity type
+(provider development is covered later in this document).
+
+<p>Here is an example of a simple request-response sequence. The client sends
+the following request to the ODataLite server.
+
+<pre class="example"><pre class="verbatim">     GET /odata/Processes(1) HTTP/1.1
+     Accept: application/json;odata.metadata=minimal
+     OData-Version: 4.0
+</pre>
+</pre>
+<p>The server delegates this request to a provider, which sends the following
+response.
+
+<pre class="example"><pre class="verbatim">     HTTP/1.1 200 OK
+     Content-Type: application/json;odata.metadata=minimal;charset=utf-8
+     OData-Version: 4.0
+     Cache-Control: no-cache
+     Content-Length: 203
+     
+     {
+       "odata.metadata": "odata/$metadata#Processes/$entity",
+       "name": "init",
+       "cmdline": "/sbin/init",
+       "state": "sleeping",
+       "pid": 1,
+       "ppid": 0,
+       "vsize": 19808256,
+       "rss": 136,
+       "rsslim": -1
+     }
+</pre>
+</pre>
+<p>As noted above, the HTTP payload is always encoded as JSON, even for errors. 
+Here is an example of a request that results in an error.
+
+<pre class="example"><pre class="verbatim">     GET /odata/Processes(123456) HTTP/1.1
+     Accept: application/json;odata.metadata=minimal
+     OData-Version: 4.0
+</pre>
+</pre>
+<p>The provider sends back the following error response.
+
+<pre class="example"><pre class="verbatim">     HTTP/1.1 404 Not Found
+     Content-Type: application/json;odata.metadata=minimal;charset=utf-8
+     OData-Version: 4.0
+     Cache-Control: no-cache
+     Content-Length: 128
+     
+     {
+       "error": {
+         "code": "3",
+         "message": {
+           "lang": "en-us",
+           "value": "not found: Process(123456)"
+         }
+       }
+     }
+</pre>
+</pre>
+<!-- ============================================================================= -->
+<!-- Building and Installing -->
+<!-- ============================================================================= -->
+<h2 class="chapter"><a name="TOC3"></a>2 Building and Installing</h2>
+
+<p>This chapter explains how to configure and build ODataLite.
+
+<h3 class="section"><a name="TOC4"></a>2.1 Configuring ODataLite</h3>
+
+<p>To configure ODataLite, type the following command:
+
+<pre class="example">     # ./configure
+</pre>
+<p>ODataLite depends on the following packages, which must be installed first:
+
+     <ul>
+<li>pam
+<li>pam-devel
+<li>openssl (future dependency)
+<li>openssl-devel (future dependency)
+<li>expat-devel (XML library, used by the &lsquo;<samp><span class="samp">csdl2c</span></samp>&rsquo; program)
+</ul>
+
+<p>The configure script checks for each of these dependencies and fails if any
+are missing.
+
+<h3 class="section"><a name="TOC5"></a>2.2 Building ODataLite</h3>
+
+<p>To build ODataLite, simply type the following command:
+
+<pre class="example">     # make
+</pre>
+<p>This step builds all components including the tests.
+
+<h3 class="section"><a name="TOC6"></a>2.3 Running the unit tests</h3>
+
+<p>To run the unit tests, simply type the following command:
+
+<pre class="example">     # make check
+</pre>
+<p>This step runs all the unit tests.
+
+<h3 class="section"><a name="TOC7"></a>2.4 Installing ODataLite</h3>
+
+<p>To install ODataLite, type the following command:
+
+<pre class="example">     # make install
+</pre>
+<p>This installs ODataLite in the default location: &lsquo;<samp><span class="samp">/opt/odatalite</span></samp>&rsquo; (which
+can be changed with the 'configure &ndash;prefix=DIR' option). The
+installation locations of the various components can be controlled with
+configure script options.
+
+<p>Note: the ODataLite PAM configuration file is not installed as part of this
+step. Since it affects security, it must be installed manually. This requires
+manually copying &lsquo;<samp><span class="samp">phit.pam</span></samp>&rsquo; (supplied with the ODataLite distribtion)
+to the PAM configuration directory. On Linux, this is done as follows (from
+the root of the ODataLite distribtion).
+
+<pre class="example">     # cp ./src/base/phit.pam /etc/pam.d/phit
+</pre>
+<h3 class="section"><a name="TOC8"></a>2.5 Layout of the ODataLite installation</h3>
+
+<p>By default, ODataLite installs under &lsquo;<samp><span class="samp">/opt/odatalite</span></samp>&rsquo;. Here
+is a list of installed files.
+
+<pre class="example">     /opt/odatalite/share/phit/background.gif
+     /opt/odatalite/share/phit/odata.html
+     /opt/odatalite/share/phit/preamble.html
+     /opt/odatalite/share/phit/postamble.html
+     /opt/odatalite/include/phit.h
+     /opt/odatalite/include/odata.h
+     /opt/odatalite/etc/phit/plugins.conf
+     /opt/odatalite/etc/phit/phitd.conf
+     /opt/odatalite/etc/phit/providers.conf
+     /opt/odatalite/etc/phit/roles.conf
+     /opt/odatalite/var/log
+     /opt/odatalite/var/phitauth
+     /opt/odatalite/var/run
+     /opt/odatalite/bin/phitcli
+     /opt/odatalite/bin/olcli
+     /opt/odatalite/bin/phitd
+     /opt/odatalite/lib/libpingplugin.so
+     /opt/odatalite/lib/libechoplugin.la
+     /opt/odatalite/lib/libpingplugin.la
+     /opt/odatalite/lib/libcheckprovider.so
+     /opt/odatalite/lib/libpingplugin.so.0.0.0
+     /opt/odatalite/lib/libodataplugin.a
+     /opt/odatalite/lib/libhelloplugin.so.0.0.0
+     /opt/odatalite/lib/libpingplugin.so.0
+     /opt/odatalite/lib/libechoplugin.so.0.0.0
+     /opt/odatalite/lib/libechoplugin.so
+     /opt/odatalite/lib/libhelloplugin.so.0
+     /opt/odatalite/lib/libhelloplugin.so
+     /opt/odatalite/lib/libcheckprovider.la
+     /opt/odatalite/lib/libcheckprovider.so.0.0.0
+     /opt/odatalite/lib/libcheckprovider.so.0
+     /opt/odatalite/lib/libechoplugin.so.0
+     /opt/odatalite/lib/libhelloplugin.la
+</pre>
+<p>This chapter discusses each of the installation directories.
+
+<h4 class="subsection"><a name="TOC9"></a>2.5.1 The &lsquo;<samp><span class="samp">/opt/odatalite/share/phit</span></samp>&rsquo; directory</h4>
+
+<p>This directory contains files to support the PHIT server's web interface
+(recall that PHIT is a web server). This directory contains files needed for
+that interface, such as HTML, GIF, JPG files.
+
+<h4 class="subsection"><a name="TOC10"></a>2.5.2 The &lsquo;<samp><span class="samp">/opt/odatalite/include</span></samp>&rsquo; directory</h4>
+
+<p>This directory contains C header files needed for developing PHIT plugins
+(&lsquo;<samp><span class="samp">phit.h</span></samp>&rsquo;) and OData providers (&lsquo;<samp><span class="samp">odata.h</span></samp>&rsquo;, &lsquo;<samp><span class="samp">odatacxx.h</span></samp>&rsquo;,
+and &lsquo;<samp><span class="samp">odatacxxinlines.h</span></samp>&rsquo;).
+
+<h4 class="subsection"><a name="TOC11"></a>2.5.3 The &lsquo;<samp><span class="samp">/opt/odatalite/etc/phit</span></samp>&rsquo; directory</h4>
+
+<p>This directory contains all configuration files used by the server, which
+includes:
+
+     <ul>
+<li>&lsquo;<samp><span class="samp">phitd.conf</span></samp>&rsquo; - configuration file for the PHIT web server. 
+<li>&lsquo;<samp><span class="samp">plugins.conf</span></samp>&rsquo; - plugins managed by the PHIT web server. 
+<li>&lsquo;<samp><span class="samp">providers.conf</span></samp>&rsquo; - providers managed by the ODataLite plugin. 
+<li>&lsquo;<samp><span class="samp">roles.conf</span></samp>&rsquo; - authentication roles and groups. 
+</ul>
+
+<h4 class="subsection"><a name="TOC12"></a>2.5.4 The &lsquo;<samp><span class="samp">/opt/odatalite/var/log</span></samp>&rsquo; directory</h4>
+
+<p>This directory is where the log files are written by the PHIT server. These
+include:
+
+     <ul>
+<li>&lsquo;<samp><span class="samp">phitd.log</span></samp>&rsquo; - main log file. 
+<li>&lsquo;<samp><span class="samp">phitrecv.log</span></samp>&rsquo; - data received from clients (with 'phitd -k' option). 
+<li>&lsquo;<samp><span class="samp">phitsend.log</span></samp>&rsquo; - data sent to clients (with 'phitd -k' option). 
+</ul>
+
+<h4 class="subsection"><a name="TOC13"></a>2.5.5 The &lsquo;<samp><span class="samp">/opt/odatalite/var/phitauth</span></samp>&rsquo; directory</h4>
+
+<p>This directory is where temporary files are kept during local authentication. 
+Clients connecting on Unix domain sockets use a local authentication scheme
+in which a secret is stored in a file in this directory. This file is readable
+only by this user. The client must read the secret from this file and present
+it to the server to prove its identify.
+
+<h4 class="subsection"><a name="TOC14"></a>2.5.6 The &lsquo;<samp><span class="samp">/opt/odatalite/var/run</span></samp>&rsquo; directory</h4>
+
+<p>This PHIT server (&lsquo;<samp><span class="samp">phitd</span></samp>&rsquo;) runs in this directory. This directory also
+contains the PID file (&lsquo;<samp><span class="samp">phitd.pid</span></samp>&rsquo;). The &lsquo;<samp><span class="samp">phitd</span></samp>&rsquo; process uses the
+PID file in three ways.
+
+     <ul>
+<li>To store its PID when it is running. 
+<li>To determine whether it is already running during startup. 
+<li>To stop the current instance of the process (&lsquo;<samp><span class="samp">phid -s</span></samp>&rsquo;). 
+</ul>
+
+<h4 class="subsection"><a name="TOC15"></a>2.5.7 The &lsquo;<samp><span class="samp">/opt/odatalite/bin</span></samp>&rsquo; directory</h4>
+
+<p>This directory contains the following programs.
+
+     <ul>
+<li>&lsquo;<samp><span class="samp">phitd</span></samp>&rsquo; - The PHIT web server daemon. 
+<li>&lsquo;<samp><span class="samp">phitcli</span></samp>&rsquo; - A command-line client utility for sending HTTP requests to the server. 
+<li>&lsquo;<samp><span class="samp">olcli</span></samp>&rsquo; - A command-line client utility for sending OData requests to the server. 
+<li>&lsquo;<samp><span class="samp">csdl2c</span></samp>&rsquo; - A command-line utility for converting CSDL XML files to C program files. 
+</ul>
+
+<h4 class="subsection"><a name="TOC16"></a>2.5.8 The &lsquo;<samp><span class="samp">/opt/odatalite/lib</span></samp>&rsquo; directory</h4>
+
+<p>This directory contains PHIT web server plugins and OData providers.
+
+<!-- ============================================================================= -->
+<!-- Runnin the server -->
+<!-- ============================================================================= -->
+<h2 class="chapter"><a name="TOC17"></a>3 Using the server</h2>
+
+<p>This chapter explains how to use the PHIT server. In particular it explains
+how to:
+
+     <ul>
+<li>Print the help message
+<li>Examine file locations
+<li>Start the server
+<li>Stop the server
+<li>Change the logging level
+<li>Use a web browser to talk to the server
+<li>Send requests to the server
+</ul>
+
+<p>All the examples below assume that the server is installed in the default
+location (&lsquo;<samp><span class="samp">/opt/odatalite</span></samp>&rsquo;).
+
+<h3 class="section"><a name="TOC18"></a>3.1 Printing the help message</h3>
+
+<p>The default installation location for the PHIT server is
+&lsquo;<samp><span class="samp">/opt/odatalite/phitd</span></samp>&rsquo;. To print the help message for this executable,
+type the following:
+
+<pre class="example">     # /opt/odatalite/phitd -h
+</pre>
+<p>This prints the following message.
+
+<pre class="example"><pre class="verbatim">     Usage: /opt/odatalite/bin/phitd [OPTIONS]
+     
+     OPTIONS:
+         -h                  Print help message
+         -f                  Run server in foreground (rather than daemonizing)
+         -p PORT             Listen on this port
+         -u PATH             Listen on this Unix-domain socket
+         -i                  Ignore authentication
+         -P                  Print list of path locations
+         -s                  Stop the server
+         -g USER             Guest user (repeatable)
+         -o USER             Operator user (repeatable)
+         -a USER             Admin user (repeatable)
+         -l LEVEL            Log level: FATAL|ERROR|WARNING|INFO|DEBUG|VERBOSE
+         -S                  Send log output to standard output
+         -k                  Log soc[k]et I/O (phitsend.log and phitrecv.log)
+         -D                  Dump incoming and outgoing messages to stdout
+</pre>
+</pre>
+<h3 class="section"><a name="TOC19"></a>3.2 Examing file locations</h3>
+
+<p>To print out the locations where the PHIT server expects to find its various
+files, type the following:
+
+<pre class="example">     # /opt/odatalite/phitd -P
+</pre>
+<p>For example, if ODataLite is installed in the default location, this prints
+the following.
+
+<pre class="example"><pre class="verbatim">     SOCKFILE{/opt/odatalite/var/run/phitd.sock}
+     PIDFILE{/opt/odatalite/var/run/phitd.pid}
+     AUTHDIR{/opt/odatalite/var/phitauth/}
+     LOGFILE{/opt/odatalite/var/log/phit.log}
+     RECVLOG{/opt/odatalite/var/log/phitrecv.log}
+     SENDLOG{/opt/odatalite/var/log/phitsend.log}
+     PHITD_CONF{/opt/odatalite/etc/phit/phitd.conf}
+     PLUGINS_CONF{/opt/odatalite/etc/phit/plugins.conf}
+     ROLES_CONF{/opt/odatalite/etc/phit/roles.conf}
+     PROVIDERS_CONF{/opt/odatalite/etc/phit/providers.conf}
+     DATADIR{/opt/odatalite/share/phit}
+     LIBDIR{/opt/odatalite/lib}
+     DATADIR{/opt/odatalite/share/phit}
+     PLUGIN_LIBDIR{/opt/odatalite/lib}
+</pre>
+</pre>
+<p>From this we can see that the server's main log file can be found here:
+
+<pre class="example">     /opt/odatalite/var/log/phitrecv.log
+</pre>
+<h3 class="section"><a name="TOC20"></a>3.3 Starting the server</h3>
+
+<p>To start the server in the background, simply type:
+
+<pre class="example">     # /opt/odatalite/bin/phitd
+</pre>
+<p>To start the server in the foreground, type this:
+
+<pre class="example">     # /opt/odatalite/bin/phitd -f
+</pre>
+<p>Starting the server in the foreground allows one to see anything printed
+to standard output by the server, plugins, or providers. This aids debugging.
+
+<h3 class="section"><a name="TOC21"></a>3.4 Stopping the server</h3>
+
+<p>To stop the server, simply type:
+
+<pre class="example">     # /opt/odatalite/bin/phitd -s
+</pre>
+<p>This stops the server by sending the kill signal to the process id found in the
+PID file. (&lsquo;<samp><span class="samp">/opt/odatalite/var/run/phitd.pid</span></samp>&rsquo;)
+
+<h3 class="section"><a name="TOC22"></a>3.5 Changing the logging level</h3>
+
+<p>The PHIT server supports the following six logging levels (listed from highest
+priority to lowest).
+
+     <ul>
+<li>&lsquo;<samp><span class="samp">FATAL</span></samp>&rsquo;
+<li>&lsquo;<samp><span class="samp">ERROR</span></samp>&rsquo;
+<li>&lsquo;<samp><span class="samp">WARNING</span></samp>&rsquo;
+<li>&lsquo;<samp><span class="samp">INFO</span></samp>&rsquo;
+<li>&lsquo;<samp><span class="samp">DEBUG</span></samp>&rsquo;
+<li>&lsquo;<samp><span class="samp">VERBOSE</span></samp>&rsquo;
+</ul>
+
+<p>The default logging level is WARNING, meaning that only WARNING log messages
+and higher are logged. The log level can be set with a command-line
+option. For example:
+
+<pre class="example">     # /opt/odatalite/bin/phitd -l VERBOSE
+</pre>
+<p>The log level can also be set by adding a line to the main configuration file
+(&lsquo;<samp><span class="samp">/opt/odatalite/etc/phit/phitd.conf</span></samp>&rsquo;). For example:
+
+<pre class="example">     loglevel=VERBOSE
+</pre>
+<h3 class="section"><a name="TOC23"></a>3.6 Using a web browser to talk to the server</h3>
+
+<p>By default, the PHIT server listens on port 8888. The port can be set with a
+command-line option. For example:
+
+<pre class="example">     # /opt/odatalite/bin/phitd -p 12345
+</pre>
+<p>The port can also be set by adding a line to the main configuration file
+(&lsquo;<samp><span class="samp">/opt/odatalite/etc/phit/phitd.conf</span></samp>&rsquo;). For example:
+
+<pre class="example">     port=12345
+</pre>
+<p>The PHIT server provides an HTML web interface for use by web browsers. This
+interface exposes information about the PHIT server and its plugins. Each
+plugin may define its own web interface. The ODataLite plugin defines a web
+interface that lists the registered OData providers and a JSON interface for
+sending OData requests to those providers.
+
+<p>To use this web interface, point the browser at the root page. For example,
+
+<pre class="example">     http://HOSTNAME:PORT/
+</pre>
+<h3 class="section"><a name="TOC24"></a>3.7 Sedning requests to the server</h3>
+
+<p>As mentioned above, the ODataLite server provides a web interface, allowing
+web browsers to interact with the server. In addition, ODataLite provides two
+command-line tools for sending requests to the PHIT server. These are discussed
+below.
+
+<h4 class="subsection"><a name="TOC25"></a>3.7.1 The &lsquo;<samp><span class="samp">phitcli</span></samp>&rsquo; tool</h4>
+
+<p>The &lsquo;<samp><span class="samp">phitcli</span></samp>&rsquo; tool sends any HTTP message (stored in a file) to the server. 
+For example, consider the following file (&lsquo;<samp><span class="samp">hello.req</span></samp>&rsquo;).
+
+<pre class="example"><pre class="verbatim">     M-POST /echo HTTP/1.1
+     Content-Type: text/plain; charset=utf-8
+     Content-Length: 13
+     TE: trailers, chunked
+     
+     Hello World!
+</pre>
+</pre>
+<p>The following command sends this request to the server:
+
+<pre class="example">     # phitcli hello.req
+</pre>
+<p>The &lsquo;<samp><span class="samp">phitcli</span></samp>&rsquo; prints the response to standard output:
+
+<pre class="example"><pre class="verbatim">     HTTP/1.1 200 OK
+     Content-Type: text/plain; charset=utf-8
+     Content-Length: 13
+     
+     Hello World!
+</pre>
+</pre>
+<p>The request is delegated to the echo plugin, which simply echos back the
+request payload.
+
+<h4 class="subsection"><a name="TOC26"></a>3.7.2 The &lsquo;<samp><span class="samp">olcli</span></samp>&rsquo; tool</h4>
+
+<p>The &lsquo;<samp><span class="samp">olcli</span></samp>&rsquo; tool sends OData requests to the PHIT server. The following
+example sends a get request, which retrieves one instance of the &lsquo;<samp><span class="samp">Gadgets</span></samp>&rsquo;
+entity.
+
+<pre class="example"><pre class="verbatim">     # olcli get '/odata/Gadgets(1)'
+     HTTP/1.1 200 OK
+     Content-Type: application/json;odata.metadata=minimal;charset=utf-8
+     OData-Version: 4.0
+     Access-Control-Allow-Origin: *
+     Cache-Control: no-cache
+     Content-Length: 196
+     
+     {
+       "@odata.context": "odata/$metadata#Gadgets/$entity",
+       "Id": 1,
+       "Color": "Red",
+       "Model": "M3403",
+       "WeigthInGrams": 765,
+       "ManufacturingDate": "2014-01-13",
+       "SerialNumber": 847574657
+     }
+</pre>
+</pre>
+<!-- ============================================================================= -->
+<!-- Server Features -->
+<!-- ============================================================================= -->
+<h2 class="chapter"><a name="TOC27"></a>4 Server Features</h2>
+
+<p>This chapter discusses several PHIT server features.
+
+<h3 class="section"><a name="TOC28"></a>4.1 HTTP Basic Authentication</h3>
+
+<p>The PHIT server supports the HTTP basic authentiation scheme, which accepts an
+HTTP header like the one below, in which the password is base-64 encoded.
+
+<pre class="example">     Authorization: Basic bWlrYnJhczpwYXNzd29yZA==
+</pre>
+<p>The server authenticates this password with PAM (Pluggable Authentication
+Module), which is described in the next section.
+
+<h3 class="section"><a name="TOC29"></a>4.2 PAM (Pluggable Authentication Module)</h3>
+
+<p>Passwords obtained from HTTP clients are passed to the PAM layer for
+authentication. This feature must be configured by installing a PAM
+configuration file. On most Linux system, this file is installed in the
+following location:
+
+<pre class="example">     # /etc/pam.d/phit
+</pre>
+<p>The source distribution contains a sample of this file, located here in
+this source tree:
+
+<pre class="example">     # odatalite-0.0.3/src/base/phit.pam
+</pre>
+<p>Here are its contents:
+
+<pre class="example"><pre class="verbatim">     # Sample PAM authentication file (copy to /etc/pam.d)
+     auth       required     pam_sepermit.so
+     auth       include      password-auth
+     account    required     pam_nologin.so
+     account    include      password-auth
+     password   include      password-auth
+     session    include      password-auth
+</pre>
+</pre>
+<h3 class="section"><a name="TOC30"></a>4.3 Authorization Roles</h3>
+
+<p>ODataLite provides a simple role-based authorization mechanism. Clients
+authenticate as system users. These users can be assigned to one of three
+roles:
+
+     <ul>
+<li>Administrator
+<li>Operator
+<li>Guest
+</ul>
+
+<p>These assignments are made either in the &lsquo;<samp><span class="samp">phit/roles.conf</span></samp>&rsquo; file or as
+&lsquo;<samp><span class="samp">phitd</span></samp>&rsquo; command-line options. Both styles simply assign users to one
+of the three roles defined above. Consider the following configuration file:
+
+<pre class="example"><pre class="verbatim">     # &lt;USERNAME>:&lt;ROLENAME>
+     root:admin
+     jsmith:operator
+     *:guest
+</pre>
+</pre>
+<p>This example makes three role assignements:
+
+     <ul>
+<li>The &lsquo;<samp><span class="samp">root</span></samp>&rsquo; user is assigned to the &lsquo;<samp><span class="samp">admin</span></samp>&rsquo; role. 
+<li>The &lsquo;<samp><span class="samp">jsmith</span></samp>&rsquo; user is assigned to the &lsquo;<samp><span class="samp">operator</span></samp>&rsquo; role. 
+<li>All other users are assigned to the &lsquo;<samp><span class="samp">guest</span></samp>&rsquo; role. 
+</ul>
+
+<p>The following &lsquo;<samp><span class="samp">phitd</span></samp>&rsquo; command-line options make the same assignments:
+
+<pre class="example"><pre class="verbatim">     # phitd -a root -o jsmith -g '*'
+</pre>
+</pre>
+<p>The server performs assignments from users to roles. The server does not perform
+the actual authorization, that is it does not prevent users from performing
+any operations. Restricting operations is left to plugins and providers. Both
+interfaces provide methods for obtaining the role of the requesting user.
+
+<!-- ============================================================================= -->
+<!-- Developing plugins -->
+<!-- ============================================================================= -->
+<h2 class="chapter"><a name="TOC31"></a>5 Developing plugins</h2>
+
+<p>This guide does not explain how to write plugins. To learn more about writing
+plugins, see the examples under the following directory in the distribution:
+
+<pre class="example"><pre class="verbatim">     odatalite-0.0.3/src/plugins
+</pre>
+</pre>
+<!-- ============================================================================= -->
+<!-- Developing OData providers -->
+<!-- ============================================================================= -->
+<h2 class="chapter"><a name="TOC32"></a>6 Developing OData providers</h2>
+
+<p>This chapter gives a very quick overview of the OData provider development
+process. ODataLite does not include any production providers, but it includes
+several samples under this directory in the distribution:
+
+<pre class="example"><pre class="verbatim">     odatalite-0.0.3/src/odata/providers
+</pre>
+</pre>
+<p>This chapter focuses on writing a provider for the &lsquo;<samp><span class="samp">Widgets</span></samp>&rsquo; entity type. 
+The distribution contains a sample implementation in this directory:
+
+<pre class="example"><pre class="verbatim">     odatalite-0.0.3/src/odata/providers/widget
+</pre>
+</pre>
+<p>The following is a sample skeleton which can be used as a starting point for
+any provider. It defines the main entry point and the methods needed by all
+providers.
+
+<pre class="example"><pre class="verbatim">     #include &lt;odata/odata.h>
+     
+     typedef struct _Provider /* Extends OL_Provider */
+     {
+         OL_Provider base;
+     }
+     Provider;
+     
+     static void _Load(
+         OL_Provider* self,
+         OL_Scope* scope)
+     {
+     }
+     
+     static void _Unload(
+         OL_Provider* self,
+         OL_Scope* scope)
+     {
+         free(self);
+     }
+     
+     static void _Get(
+         OL_Provider* self_,
+         OL_Scope* scope,
+         const OL_URI* uri)
+     {
+         OL_Scope_SendResult(scope, OL_Result_NotSupported);
+     }
+     
+     static void _Post(
+         OL_Provider* self,
+         OL_Scope* scope,
+         const OL_URI* uri,
+         const OL_Object* object)
+     {
+         OL_Scope_SendResult(scope, OL_Result_NotSupported);
+     }
+     
+     static void _Put(
+         OL_Provider* self,
+         OL_Scope* scope,
+         const OL_URI* uri,
+         const OL_Object* object)
+     {
+         OL_Scope_SendResult(scope, OL_Result_NotSupported);
+     }
+     
+     static void _Patch(
+         OL_Provider* self,
+         OL_Scope* scope,
+         const OL_URI* uri,
+         const OL_Object* object)
+     {
+         OL_Scope_SendResult(scope, OL_Result_NotSupported);
+     }
+     
+     static void _Delete(
+         OL_Provider* self,
+         OL_Scope* scope,
+         const OL_URI* uri)
+     {
+         OL_Scope_SendResult(scope, OL_Result_NotSupported);
+     }
+     
+     static OL_ProviderFT _ft =
+     {
+         _Load,
+         _Unload,
+         _Get,
+         _Post,
+         _Put,
+         _Patch,
+         _Delete
+     };
+     
+     OL_EXPORT OL_Provider* OL_ProviderEntryPoint()
+     {
+         return NULL;
+     }
+</pre>
+</pre>
+<h3 class="section"><a name="TOC33"></a>6.1 Implementing the entry point</h3>
+
+<p>Starting with this skeleton, the first step is to implement the main entry
+point. A typical implementation allocates and returns a structure that
+points to the function table of provider methods. For example:
+
+<pre class="example"><pre class="verbatim">     OL_EXPORT OL_Provider* OL_ProviderEntryPoint()
+     {
+         Provider* self;
+     
+         /* Allocate the Provider structure */
+         if (!(self = (Provider*)calloc(1, sizeof(Provider))))
+             return NULL;
+     
+         /* Set the function table */
+         self->base.ft = &amp;_ft;
+     
+         return &amp;self->base;
+     }
+</pre>
+</pre>
+<p>The &lsquo;<samp><span class="samp">Provider</span></samp>&rsquo; structure is defined locally and extends the
+&lsquo;<samp><span class="samp">OL_Provider</span></samp>&rsquo; structure. Here is its definition:
+
+<pre class="example"><pre class="verbatim">     typedef struct _Provider /* Extends OL_Provider */
+     {
+         OL_Provider base;
+         /* Define provider-specific fields here */
+     }
+     Provider;
+</pre>
+</pre>
+<p>The first field is a structure of type &lsquo;<samp><span class="samp">OL_Provider</span></samp>&rsquo;. This allows the
+&lsquo;<samp><span class="samp">Provider</span></samp>&rsquo; structure to be casted to and treated as a structure of type
+&lsquo;<samp><span class="samp">OL_Provider</span></samp>&rsquo; by the server.
+
+<p>Provider developers may define provider-specific fields. This structure is
+cast to &lsquo;<samp><span class="samp">OL_Provider</span></samp>&rsquo; and passed as the first parameter to all the provider
+methods. The provider developer may cast this parameter to &lsquo;<samp><span class="samp">Provider</span></samp>&rsquo; in
+order to access the extended fields.
+
+<p>The &lsquo;<samp><span class="samp">Provider.base.ft</span></samp>&rsquo; field must point to a function table of the
+provider's methods. This function table is defined locally, just above the
+&lsquo;<samp><span class="samp">OL_ProviderEntryPoint</span></samp>&rsquo; function, as follows.
+
+<pre class="example"><pre class="verbatim">     static OL_ProviderFT _ft =
+     {
+         _Load,
+         _Unload,
+         _Get,
+         _Post,
+         _Put,
+         _Patch,
+         _Delete,
+     };
+</pre>
+</pre>
+<p>The operations performed by the functions are defined as follows.
+
+     <ul>
+<li>&lsquo;<samp><span class="samp">Load</span></samp>&rsquo; - Called when the provider is loaded. 
+<li>&lsquo;<samp><span class="samp">Unload</span></samp>&rsquo; - Called when the provider is unloaded. 
+<li>&lsquo;<samp><span class="samp">Get</span></samp>&rsquo; - Gets an entity set or a single entity or invokes a function. 
+<li>&lsquo;<samp><span class="samp">Post</span></samp>&rsquo; - Creates an entiy or invokes an action. 
+<li>&lsquo;<samp><span class="samp">Put</span></samp>&rsquo; - Updates an entiy. 
+<li>&lsquo;<samp><span class="samp">Patch</span></samp>&rsquo; - Updates an entity. 
+<li>&lsquo;<samp><span class="samp">Delete</span></samp>&rsquo; - Deletes an entiy. 
+</ul>
+
+<h3 class="section"><a name="TOC34"></a>6.2 The &lsquo;<samp><span class="samp">Unload</span></samp>&rsquo; method</h3>
+
+<p>The &lsquo;<samp><span class="samp">Unload</span></samp>&rsquo; method is responsible for releasing the structure allocated
+by the &lsquo;<samp><span class="samp">OL_ProviderEntryPoint</span></samp>&rsquo; function. This example defines the
+&lsquo;<samp><span class="samp">Unload</span></samp>&rsquo; function as follows.
+
+<pre class="example"><pre class="verbatim">     static void _Unload(
+         OL_Provider* self,
+         OL_Scope* scope)
+     {
+         free(self);
+     }
+</pre>
+</pre>
+<p>The &lsquo;<samp><span class="samp">Unload</span></samp>&rsquo; method should also release any other resources allocated by
+the provider.
+
+<h3 class="section"><a name="TOC35"></a>6.3 Implementing the &lsquo;<samp><span class="samp">Get</span></samp>&rsquo; method</h3>
+
+<p>As mentioned above, the &lsquo;<samp><span class="samp">Get</span></samp>&rsquo; method can do one of three things:
+
+     <ul>
+<li>Get an entity set
+<li>Get a single entity
+<li>Invoke a function
+</ul>
+
+<p>The example shows how to do the first two. The signature of the &lsquo;<samp><span class="samp">Get</span></samp>&rsquo;
+method is defined as follows.
+
+<pre class="example"><pre class="verbatim">     void Get(
+         OL_Provider* self,
+         OL_Scope* scope,
+         const OL_URI* uri);
+</pre>
+</pre>
+<p>The &lsquo;<samp><span class="samp">self</span></samp>&rsquo; parameter refers to the &lsquo;<samp><span class="samp">Provider</span></samp>&rsquo; structure allocated
+by the &lsquo;<samp><span class="samp">OL_ProviderEntryPoint</span></samp>&rsquo; entry point function.
+
+<p>The &lsquo;<samp><span class="samp">scope</span></samp>&rsquo; parameter acts as the invocation context for the operation. 
+This object is used to allocate objects of various kinds and to post results
+back to the server. We will see an example of this below.
+
+<p>The &lsquo;<samp><span class="samp">uri</span></samp>&rsquo; parameter is a structural representation of the URI passed
+in the original request. In the following example, it represents the URI.
+
+<pre class="example">     GET odata/Widgets(1001)
+</pre>
+<p>Methods are defined for accessing various parts of the URI. For example,
+the following obtains the name of the &lsquo;<samp><span class="samp">Widgets</span></samp>&rsquo; segment (where 0 is the
+index of the &lsquo;<samp><span class="samp">Widgets</span></samp>&rsquo; segment).
+
+<pre class="example"><pre class="verbatim">     if (!(name = OL_URI_GetName(uri, 0)))
+     {
+         OL_Scope_SendResult(scope, OL_Result_Failed);
+         return;
+     }
+</pre>
+</pre>
+<p>The number of segments can be determined by calling the &lsquo;<samp><span class="samp">OL_URI_Count</span></samp>&rsquo;
+method. Note that the &lsquo;<samp><span class="samp">odata</span></samp>&rsquo; segment is discarded, so &lsquo;<samp><span class="samp">OL_URI_Count</span></samp>&rsquo;
+return one.
+
+<p>The example above has one key (&lsquo;<samp><span class="samp">1001</span></samp>&rsquo;). The &lsquo;<samp><span class="samp">OL_URI_KeyCount</span></samp>&rsquo; method
+determines how many keys a given segment has. If it has any keys, then the
+providersshould return a single instance. Otherwise, the provider should
+return an entity set. The following shows the code required to return an
+entity set.
+
+<pre class="example"><pre class="verbatim">     if (OL_URI_KeyCount(uri, 0) == 0)
+     {
+         OL_Object* obj;
+     
+         OL_Scope_SendBeginEntitySet(scope);
+     
+         /* Send Widgets(1001) */
+         {
+             if (!(obj = MakeWidget(scope, 1001, "Red", "A1", 55)))
+             {
+                 OL_Scope_SendResult(scope, OL_Result_OutOfMemory);
+                 return;
+             }
+     
+             OL_Scope_SendEntity(scope, obj);
+             OL_Object_Release(obj);
+         }
+     
+         /* Send Widgets(1002) */
+         {
+             if (!(obj = MakeWidget(scope, 1002, "Green", "A2", 65)))
+             {
+                 OL_Scope_SendResult(scope, OL_Result_OutOfMemory);
+                 return;
+             }
+     
+             OL_Scope_SendEntity(scope, obj);
+             OL_Object_Release(obj);
+         }
+     
+         OL_Scope_SendEndEntitySet(scope);
+         OL_Scope_SendResult(scope, OL_Result_Ok);
+         return;
+     }
+</pre>
+</pre>
+<p>This provider sends two instances. The &lsquo;<samp><span class="samp">MakeWidget</span></samp>&rsquo; method uses the
+&lsquo;<samp><span class="samp">OL_Object</span></samp>&rsquo; interface to make an instances of &lsquo;<samp><span class="samp">Widget</span></samp>&rsquo;. It is
+defined as follows.
+
+<pre class="example"><pre class="verbatim">     OL_Object* MakeWidget(
+         OL_Scope* scope,
+         long long id,
+         const char* color,
+         const char* model,
+         unsigned int weight)
+     {
+         OL_Object* obj;
+     
+         if (!(obj = OL_Scope_NewObject(scope)))
+             return NULL;
+     
+         OL_Object_AddInt64(obj, "Id", id);
+         OL_Object_AddString(obj, "Color", color);
+         OL_Object_AddString(obj, "Model", model);
+         OL_Object_AddInt32(obj, "Weigth", weight);
+     
+         return obj;
+     }
+</pre>
+</pre>
+<p>Objects created by &lsquo;<samp><span class="samp">OL_Scope_NewObject</span></samp>&rsquo; should eventually be released by
+the &lsquo;<samp><span class="samp">OL_Scope_Release</span></samp>&rsquo; method.
+
+<p>If the URI has any keys, then the provider should return a single entity. Here
+is the code that handles that case.
+
+<pre class="example"><pre class="verbatim">     if (OL_URI_KeyCount(uri, 0) == 1)
+     {
+         OL_Int64 id;
+         OL_Object* obj;
+     
+         /* Get the key from the URI (e.g., 'odata/Widgets(1001)') */
+         if (OL_URI_GetKeyInt64(uri, 0, "$0", &amp;id) != OL_Result_Ok)
+         {
+             OL_Scope_SendResult(scope, OL_Result_NotSupported);
+             return;
+         }
+     
+         /* Send Widgets(1001) */
+         if (id == 1001)
+         {
+             if (!(obj = MakeWidget(scope, 1001, "Red", "A1", 55)))
+             {
+                 OL_Scope_SendResult(scope, OL_Result_OutOfMemory);
+                 return;
+             }
+     
+             OL_Scope_SendEntity(scope, obj);
+             OL_Object_Release(obj);
+             OL_Scope_SendResult(scope, OL_Result_Ok);
+             return;
+         }
+     
+         /* Send Widgets(1002) */
+         if (id == 1002)
+         {
+             if (!(obj = MakeWidget(scope, 1002, "Green", "A2", 65)))
+             {
+                 OL_Scope_SendResult(scope, OL_Result_OutOfMemory);
+                 return;
+             }
+     
+             OL_Scope_SendEntity(scope, obj);
+             OL_Object_Release(obj);
+             OL_Scope_SendResult(scope, OL_Result_Ok);
+             return;
+         }
+     
+         OL_Scope_SendResult(scope, OL_Result_NotFound);
+         return;
+     }
+</pre>
+</pre>
+<h3 class="section"><a name="TOC36"></a>6.4 Registering the &lsquo;<samp><span class="samp">Widgets</span></samp>&rsquo; provider</h3>
+
+<p>To register the provider, add the following line to the &lsquo;<samp><span class="samp">providers.conf</span></samp>&rsquo;
+file:
+
+<pre class="example"><pre class="verbatim">     widgetprovider:/Widgets:
+</pre>
+</pre>
+<p>Where the first field (&lsquo;<samp><span class="samp">widgetprovider</span></samp>&rsquo;) is the name root name of the
+library (the fullname might be something like &lsquo;<samp><span class="samp">libwidgetprovider.so</span></samp>&rsquo;. The
+second field is a comma-separated lists of segments that the provider handles
+(&lsquo;<samp><span class="samp">/Widgets</span></samp>&rsquo; in this case).
+
+<h3 class="section"><a name="TOC37"></a>6.5 Testing the provider</h3>
+
+<p>To test the provider, restart the PHIT server and use the &lsquo;<samp><span class="samp">olcli</span></samp>&rsquo;
+command-line program to send a get request to the server as follows.
+
+<pre class="example"><pre class="verbatim">     # olcli get 'odata/Widgets'
+     HTTP/1.1 200 OK
+     Content-Type: application/json;odata.metadata=minimal;charset=utf-8
+     OData-Version: 4.0
+     Access-Control-Allow-Origin: *
+     Cache-Control: no-cache
+     Content-Length: 255
+     
+     {
+       "@odata.context": "odata/$metadata#Widgets",
+       "value": [
+         {
+           "Id": 1001,
+           "Color": "Red",
+           "Model": "A1",
+           "Weigth": 55
+         },
+         {
+           "Id": 1002,
+           "Color": "Green",
+           "Model": "A2",
+           "Weigth": 65
+         }
+       ]
+     }
+</pre>
+</pre>
+<p>This request obtains an entity set. To request a single entity, try this:
+
+<pre class="example"><pre class="verbatim">     # olcli get 'odata/Widgets(1001)'
+     HTTP/1.1 200 OK
+     Content-Type: application/json;odata.metadata=minimal;charset=utf-8
+     OData-Version: 4.0
+     Access-Control-Allow-Origin: *
+     Cache-Control: no-cache
+     Content-Length: 122
+     
+     {
+       "@odata.context": "odata/$metadata#Widgets/$entity",
+       "Id": 1001,
+       "Color": "Red",
+       "Model": "A1",
+       "Weigth": 55
+     }
+</pre>
+</pre>
+<p>Also, recall that web browsers can be used to send OData requests. Simply
+browse to the following URL.
+
+<pre class="example"><pre class="verbatim">     http://HOSTNAME[:PORT]/odata/webpage
+</pre>
+</pre>
+<h3 class="section"><a name="TOC38"></a>6.6 Providing Metadata</h3>
+
+<p>Providers may provide metadata through the &lsquo;<samp><span class="samp">Get</span></samp>&rsquo; method. These providers
+may dynamically generate metadata or they may use the &lsquo;<samp><span class="samp">csdl2c</span></samp>&rsquo; to convert
+CSDL XML into static C definitions. To see an example of this, look at the
+following example:
+
+<pre class="example"><pre class="verbatim">     odatalite-0.0.3/src/odata/providers/metadata
+</pre>
+</pre>
+<!-- ============================================================================= -->
+<!-- Development tips -->
+<!-- ============================================================================= -->
+<h2 class="chapter"><a name="TOC39"></a>7 Development tips</h2>
+
+<p>This chapter discusses some development tips that make development a little
+easier.
+
+<h3 class="section"><a name="TOC40"></a>7.1 Running PHIT from the source directory</h3>
+
+<p>To run PHIT form the source directory, set the &lsquo;<samp><span class="samp">PHIT_PREFIX</span></samp>&rsquo; environment
+variable to refer to the root of the source distribution. For example:
+
+<pre class="example"><pre class="verbatim">     export PHIT_PREFIX=/home/jdoe/odatalite
+</pre>
+</pre>
+<p>This makes the PHIT server look for all its configuration files and other
+ocmponetns under the source directory. This allows the developer to maintain
+the server, the plugins, and the providers without having to repeatedly
+install. When running out of the source directory, the server listens on
+port &lsquo;<samp><span class="samp">12345</span></samp>&rsquo;.
+
+<p>Note: be sure this environment variable is not defined when attempting to
+run the server from the installation directory (else it looks for its
+configuration in the source directory).
+
+<h3 class="section"><a name="TOC41"></a>7.2 Running PHIT in the foreground</h3>
+
+<p>To run the PHIT server in the foreground (without daemonization), use this
+option:
+
+<pre class="example"><pre class="verbatim">     # ./phitd -f
+</pre>
+</pre>
+<p>This allows the developer to see what is written to standard output by
+the server and by the provider.
+
+<h3 class="section"><a name="TOC42"></a>7.3 Disabling authentication</h3>
+
+<p>Constantly authenticating is somewhat of a nuisance during development, so
+we suggest disabling it with the following option during development:
+
+<pre class="example"><pre class="verbatim">     # ./phitd -i
+</pre>
+</pre>
+<h3 class="section"><a name="TOC43"></a>7.4 Increasing the logging level</h3>
+
+<p>To increase the looging level to &lsquo;<samp><span class="samp">VERBOSE</span></samp>&rsquo;, use the following option:
+
+<pre class="example"><pre class="verbatim">     # ./phitd -l VERBOSE
+</pre>
+</pre>
+<p>This allows capturing of all log messages.
+
+<h3 class="section"><a name="TOC44"></a>7.5 Logging to standard output</h3>
+
+<p>To log to standard output, use the following option:
+
+<pre class="example"><pre class="verbatim">     # ./phitd -S
+</pre>
+</pre>
+<h3 class="section"><a name="TOC45"></a>7.6 Logging socket I/O</h3>
+
+<p>To log all socket I/O to log files, use the &lsquo;<samp><span class="samp">-k</span></samp>&rsquo; option. Input is written
+to &lsquo;<samp><span class="samp">phitsend.log</span></samp>&rsquo; and output is written to &lsquo;<samp><span class="samp">phitrecv.log</span></samp>&rsquo;. For
+example:
+
+<pre class="example"><pre class="verbatim">     # ./phitd -k
+</pre>
+</pre>
+<h3 class="section"><a name="TOC46"></a>7.7 Dump requests and responses to standard output</h3>
+
+<p>Use the &lsquo;<samp><span class="samp">-D</span></samp>&rsquo; option to dump HTTP requests and responses to standard
+output. For example:
+
+<pre class="example"><pre class="verbatim">     # ./phitd -D
+</pre>
+</pre>
+</body></html>
+

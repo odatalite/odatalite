@@ -1,0 +1,9 @@
+PATCH odata/Person
+OData-Version: 4.0
+Accept: application/json
+TE: trailers, chunked
+Content-Length: 30
+
+<xml>
+    <a>stuff</a>
+</xml>

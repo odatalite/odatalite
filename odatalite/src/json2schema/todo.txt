@@ -1,0 +1,4 @@
+
+    (*) Handle parsing of JSON-Redfish actions
+
+    (*) Convert integer enums to actual integers (space & efficiency)

@@ -1,0 +1,7 @@
+#!/bin/sh
+chmod +x scripts/autogen
+chmod +x scripts/autoclean
+chmod +x src/client/regress
+chmod +x src/client/get
+chmod +x src/client/enum
+chmod +x src/providers/foo/fooprov

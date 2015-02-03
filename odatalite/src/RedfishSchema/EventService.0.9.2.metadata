@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OData"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/DMTFExtensions">
+    <edmx:Include Namespace="DMTFExtensions.0.9.2" Alias="DMTF"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Measures.V1.xml">
+    <edmx:Include Namespace="Org.OData.Measures.V1" Alias="OData.Measures"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Resource">
+    <edmx:Include Namespace="Resource.0.9.2" Alias="Resource"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Event">
+    <edmx:Include Namespace="Event.0.9.2" Alias="Event"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/ListenerDestination">
+    <edmx:Include Namespace="ListenerDestination.0.9.2" Alias="ListenerDestination"/>
+  </edmx:Reference>
+
+  <edmx:DataServices>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="EventService.0.9.2" Alias="EventService">
+
+      <!-- This schema defines an event service and its respective properties.-->
+      <EntityType Name="EventService" BaseType="Resource.Resource">
+        <Annotation Term="OData.Description" String="This is the schema definition for the Event Service.  It represents the properties for the service itself and has links to the actual list of subscriptions."/>
+        <Annotation Term="OData.LongDescription" String="This resource shall be used to represent an eventing service in the SPMA specification."/>
+        <Property Name="Links" Type="EventService.Links" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This object contains the links to other resources that are related to this resource."/>
+        </Property>
+        <Property Name="DeliveryRetryAttempts" Type="Edm.Int64" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the number of attempts an event posting is retried before the subscription is terminated."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the number of retrys attempted for any given event to the subscription destination before the subscription is terminated."/>
+        </Property>
+        <Property Name="DeliveryRetryIntervalInSeconds" Type="Edm.Int64" Nullable="false">
+          <Annotation Term="OData.Measures.Units" String="Seconds"/>
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This represents the number of seconds between retry attempts for sending any given Event"/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the interval in seconds between the retry attempts for any given event to the subscription destination."/>
+        </Property>
+        <Property Name="SubscriptionRemovalAction" Type="EventService.SubscriptionRemovalAction" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This property indicates what the service will do to an event subscription after the number of delivery retry attempts has been exhausted."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the action the service takes for subscriptions that have the number failed event deliveries equal to the value of DeliveryRetryAttempts fail without any successful event deliveries in between the failed deliveries. 'Remove' defines the subscription is to be removed. 'Disable' indicates that subscription removal process is not being enforced but no further events will be sent to this destination. 'Ignore' indicates that the removal action is temporarily not enforced and further events will be sent to this destination."/>
+        </Property>
+        <Property Name="SubscriptionRemovalTimeIntervalInMinutes" Type="Edm.Int64" Nullable="false">
+          <Annotation Term="OData.Measures.Units" String="Minutes"/>
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the minimum amount of time after the failed events that the service will wait before doing the SubscriptionRemovalAction."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the universal unique identifier number for the system."/>
+        </Property>
+        <Property Name="EventTypesForSubscription" Type="Collection(Event.EventType)" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the types of Events that can be subscribed to."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be the types of events that subscriptions can subscribe to.  The semantics associated with the enumerations values are defined in the SPMA specification."/>
+        </Property>
+        <Property Name="Actions" Type="EventService.Actions" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="The Actions object contains the available custom actions on this resource."/>
+        </Property>
+      </EntityType>
+
+      <ComplexType Name="Actions">
+        <Property Name="Oem" Type="EventService.OemActions"/>
+      </ComplexType>
+      <ComplexType Name="OemActions"/>
+
+      <ComplexType Name="Links">
+        <NavigationProperty Name="Subscriptions" Type="Collection(ListenerDestination.ListenerDestination)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is a reference to a collection of ListenerDestination resources."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall be a link to a collection of ListenerDestinations."/>
+        </NavigationProperty>
+        <Property Name="Oem" Type="Resource.Oem"/>
+      </ComplexType>
+
+      <!-- The SubmitTestEvent action causes a test event to be emitted. -->
+      <Action Name="SubmitTestEvent" IsBound="true">
+        <Annotation Term="OData.Description" String="The SubmitTestEvent action causes a test event to be added to the event service.  This message should then be sent to any appropriate ListenerDestination targets."/>
+        <Annotation Term="OData.LongDescription" String="This defines the name of the custom action supported when used in conjunction with a POST operation to this resource. When issued, this operation will perform a reset of the manager."/>
+        <Parameter Name="EventService" Type="EventService.Actions"/>
+        <!-- TODO Should discuss using the EventRecord complex type instead of the set of next parameters -->
+        <Parameter Name="EventType" Type="Event.EventType" Nullable="false">
+          <Annotation Term="OData.Description" String="This is the type of event to be added."/>
+          <Annotation Term="OData.LongDescription" String="This defines the property name for which the following allowable values apply."/>
+        </Parameter>
+        <Parameter Name="EventID" Type="Edm.String" Nullable="false">
+          <Annotation Term="OData.Description" String="This is the ID of event to be added."/>
+          <Annotation Term="OData.LongDescription" String="This property has the same semantics as the EventID property in the Event schema for SPMA."/>
+        </Parameter>
+        <Parameter Name="EventTimestamp" Type="Edm.DateTimeOffset" Nullable="false">
+          <Annotation Term="OData.Description" String="This is the time stamp of event to be added."/>
+          <Annotation Term="OData.LongDescription" String="This property has the same semantics as the EventID property in the Event schema for SPMA."/>
+        </Parameter>
+        <Parameter Name="Severity" Type="Edm.String" Nullable="false">
+          <Annotation Term="OData.Description" String="This is the Severity of event to be added."/>
+          <Annotation Term="OData.LongDescription" String="This property has the same semantics as the Severity property in the Event schema for SPMA."/>
+        </Parameter>
+        <Parameter Name="Message" Type="Edm.String" Nullable="false">
+          <Annotation Term="OData.Description" String="This is the human readable message of event to be added."/>
+          <Annotation Term="OData.LongDescription" String="This property has the same semantics as the Message property in the Event schema for SPMA."/>
+        </Parameter>
+        <Parameter Name="MessageID" Type="Edm.String" Nullable="false">
+          <Annotation Term="OData.Description" String="This is the message ID of event to be added."/>
+          <Annotation Term="OData.LongDescription" String="This property has the same semantics as the MessageID property in the Event schema for SPMA."/>
+        </Parameter>
+        <Parameter Name="MessageArgs" Type="Collection(Edm.String)" Nullable="false">
+          <Annotation Term="OData.Description" String="This is the array of message arguments of the event to be added."/>
+          <Annotation Term="OData.LongDescription" String="This property has the same semantics as the MessageArgs property in the Event schema for SPMA."/>
+        </Parameter>
+        <Parameter Name="OriginOfCondition" Type="Edm.String" Nullable="false">
+          <Annotation Term="OData.Description" String="This is the OriginOfCondition property of event to be added."/>
+          <Annotation Term="OData.LongDescription" String="This property has the same semantics as the OriginOfCondition property in the Event schema for SPMA."/>
+        </Parameter>
+      </Action>
+      
+      <!-- Subscription removal action indicates what the service will do to an event subscription after the number of delivery retry attempts has been exhausted. -->
+      <EnumType Name="SubscriptionRemovalAction">
+        <Member Name="Remove">
+          <Annotation Term="OData.Description" String="Remove the subscription"/>
+        </Member>
+        <Member Name="Disable">
+          <Annotation Term="OData.Description" String="Disable the subscription"/>
+        </Member>
+        <Member Name="Ignore">
+          <Annotation Term="OData.Description" String="Ignore the condition"/>
+        </Member>
+      </EnumType>
+
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

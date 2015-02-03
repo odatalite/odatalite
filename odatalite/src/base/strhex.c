@@ -1,0 +1,154 @@
+/*
+**==============================================================================
+**
+** ODatatLite ver. 0.0.3
+**
+** Copyright (c) Microsoft Corporation
+**
+** All rights reserved. 
+**
+** MIT License
+**
+** Permission is hereby granted, free of charge, to any person obtaining a copy ** of this software and associated documentation files (the ""Software""), to 
+** deal in the Software without restriction, including without limitation the 
+** rights to use, copy, modify, merge, publish, distribute, sublicense, and/or 
+** sell copies of the Software, and to permit persons to whom the Software is 
+** furnished to do so, subject to the following conditions: The above copyright ** notice and this permission notice shall be included in all copies or 
+** substantial portions of the Software.
+**
+** THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+** IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+** FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+** AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+** LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+** OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 
+** THE SOFTWARE.
+**
+**==============================================================================
+*/
+#include "str.h"
+
+const char __hexNibbleToChar[] =
+{
+    '0', '1', '2', '3', '4', '5', '6', '7', 
+    '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+};
+
+const unsigned char __charToHexNibble[] =
+{
+#if defined(FAST_STRING_TO_HEX)
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+#endif
+    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+    0x08, 0x09, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 
+#if defined(FAST_STRING_TO_HEX)
+    0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+#endif
+};
+
+const char* UIntToHexStr(
+    char buf[8], 
+    unsigned int x,
+    size_t* size)
+{
+    const char* str;
+
+    if (x & 0xFFFF0000)
+    {
+        buf[0] = __hexNibbleToChar[(x >> 28) & 0x0000000F];
+        buf[1] = __hexNibbleToChar[(x >> 24) & 0x0000000F];
+        buf[2] = __hexNibbleToChar[(x >> 20) & 0x0000000F];
+        buf[3] = __hexNibbleToChar[(x >> 16) & 0x0000000F];
+        buf[4] = __hexNibbleToChar[(x >> 12) & 0x0000000F];
+        buf[5] = __hexNibbleToChar[(x >>  8) & 0x0000000F];
+        buf[6] = __hexNibbleToChar[(x >>  4) & 0x0000000F];
+        buf[7] = __hexNibbleToChar[(x >>  0) & 0x0000000F];
+
+        str = &buf[0];
+
+        while (str != &buf[7] && *str == '0')
+            str++;
+    }
+    else
+    {
+        buf[4] = __hexNibbleToChar[(x >> 12) & 0x0000000F];
+        buf[5] = __hexNibbleToChar[(x >>  8) & 0x0000000F];
+        buf[6] = __hexNibbleToChar[(x >>  4) & 0x0000000F];
+        buf[7] = __hexNibbleToChar[(x >>  0) & 0x0000000F];
+
+        str = &buf[4];
+
+        if (*str == '0')
+        {
+            if (*++str == '0')
+            {
+                if (*++str == '0')
+                    str++;
+            }
+        }
+    }
+
+    if (size)
+        *size = &buf[8] - str;
+
+    return str;
+}
+
+int HexStr4ToUint(
+    const char* s,
+    unsigned int* x)
+{
+    unsigned int n0 = CharToHexNibble(s[0]);
+    unsigned int n1 = CharToHexNibble(s[1]);
+    unsigned int n2 = CharToHexNibble(s[2]);
+    unsigned int n3 = CharToHexNibble(s[3]);
+
+    if ((n0 | n1 | n2 | n3) & 0xF0)
+        return -1;
+
+    *x = (n0 << 12) | (n1 << 8) | (n2 << 4) | n3;
+    return 0;
+}
+
+void UIntToHexStr8(
+    char buf[8], 
+    unsigned int x)
+{
+    buf[0] = __hexNibbleToChar[(x >> 28) & 0x0000000F];
+    buf[1] = __hexNibbleToChar[(x >> 24) & 0x0000000F];
+    buf[2] = __hexNibbleToChar[(x >> 20) & 0x0000000F];
+    buf[3] = __hexNibbleToChar[(x >> 16) & 0x0000000F];
+    buf[4] = __hexNibbleToChar[(x >> 12) & 0x0000000F];
+    buf[5] = __hexNibbleToChar[(x >>  8) & 0x0000000F];
+    buf[6] = __hexNibbleToChar[(x >>  4) & 0x0000000F];
+    buf[7] = __hexNibbleToChar[(x >>  0) & 0x0000000F];
+}

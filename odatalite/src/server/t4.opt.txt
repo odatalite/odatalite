@@ -1,0 +1,10 @@
+813,703,191 Baseline
+787,890,114 Object.SetFlags
+776,683,494 Pull-based
+772,743,292 ???
+468,660,908 Eliminated use of scanf() on /proc/<PID>/stat file.
+424,286,463 Use LongLontToString rather than sprintf()
+426,818,307
+334,139,523 (using field flags with ProcessInfoLoad)
+328,578,375 (eliminate memset of ProcessInfo)
+342,856,926 ???

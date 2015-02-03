@@ -1,0 +1,33 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+POST /service/$batch HTTP/1.1
+Host: odata.org
+OData-Version: 1.0 
+OData-MaxVersion: 3.0 
+Content-Type:
+multipart/mixed;boundary=batch_36522ad7-fc75-4b56-8c71-56071383e77b
+
+<Batch Request Body>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+HTTP/1.1 200 Ok
+OData-Version: 4.0
+Content-Length: ####
+Content-Type: multipart/mixed;boundary=b_243234_25424_ef_892u748
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+GET https://host:1234/path/service/People(1) HTTP/1.1 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+GET /OData/OData.svc/Products HTTP/1.1 host: services.odata.org accept:
+application/json
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+GET /OData/OData.svc/Products HTTP/1.1 Host: services.odata.org 
+  accept: application/atom+xml,application/xml 
+  DataServiceVersion: 1.0 MaxDataServiceVersion: 2.0 
+

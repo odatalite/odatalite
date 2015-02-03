@@ -1,0 +1,9 @@
+Frog_Id:Id
+Frog_UserName:UserName
+Frog_First:First
+Frog_Last:Last
+Frog_Color:Color
+Frog_Birthdate:Birthdate
+Frog_Friend:Friend@odata.navigationLink
+Frog_Binary:Binary
+Frog_Holidays:Holidays

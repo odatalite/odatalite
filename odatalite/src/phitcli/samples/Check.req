@@ -1,0 +1,5 @@
+GET /odata/Check()
+OData-Version: 4.0
+Accept: application/json;odata.metadata=full
+TE: trailers, chunked
+

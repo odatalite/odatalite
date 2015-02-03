@@ -1,0 +1,8 @@
+
+    ./olcli get /odata/Gadgets
+
+    ./olcli create '/odata/Gadgets' gadget11.json 
+
+    ./olcli remove '/odata/Gadgets(1)'
+
+    ./olcli update '/odata/Gadgets(1)' gadget11.json 

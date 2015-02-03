@@ -1,0 +1,71 @@
+HTTP/1.1 200 OK
+Content-Type: application/xml;odata.metadata=minimal;charset=utf-8
+OData-Version: 4.0
+Access-Control-Allow-Origin: *
+Cache-Control: no-cache
+Content-Length: 3309
+
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OData"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/DMTFExtensions">
+    <edmx:Include Namespace="DMTFExtensions.0.9.2" Alias="DMTF"/>
+    <edmx:Include Namespace="Validation.0.9.2" Alias="Validation"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/EventService">
+    <edmx:Include Namespace="EventService.0.9.2" Alias="EventService"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/AccountService">
+    <edmx:Include Namespace="AccountService.0.9.2" Alias="AccountService"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/ComputerSystem">
+    <edmx:Include Namespace="ComputerSystem.0.9.2" Alias="ComputerSystem"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Chassis">
+    <edmx:Include Namespace="Chassis.0.9.2" Alias="Chassis"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Manager">
+    <edmx:Include Namespace="Managers.0.9.2" Alias="Manager"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/TaskService">
+    <edmx:Include Namespace="TaskService.0.9.2" Alias="TaskService"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Session">
+    <edmx:Include Namespace="Session.0.9.2" Alias="Session"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Messages">
+    <edmx:Include Namespace="Messages.0.9.2" Alias="Messages"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="ServiceRoot.0.9.2" Alias="ServiceRoot">
+      <EntityType Name="ServiceRoot" BaseType="Resource.Resource">
+        <Property Name="Time" Type="Edm.DateTimeOffset"/>
+        <Property Name="ServiceVersion" Type="Edm.String" Nullable="false"/>
+        <Property Name="UUID" Type="ServiceRoot.UUID"/>
+        <Property Name="Links" Type="ServiceRoot.ServiceRootLinks" Nullable="false"/>
+      </EntityType>
+      <ComplexType Name="ServiceRootLinks">
+        <NavigationProperty Name="Systems" Type="Collection(ComputerSystem.ComputerSystem)">
+        </NavigationProperty>
+        <NavigationProperty Name="Chassis" Type="Collection(Chassis.Chassis)">
+        </NavigationProperty>
+        <NavigationProperty Name="Managers" Type="Collection(Manager.Manager)">
+        </NavigationProperty>
+        <NavigationProperty Name="Tasks" Type="Collection(TaskService.TaskService)">
+        </NavigationProperty>
+        <NavigationProperty Name="AccountService" Type="AccountService.AccountService">
+        </NavigationProperty>
+        <NavigationProperty Name="EventService" Type="EventService.EventService">
+        </NavigationProperty>
+        <NavigationProperty Name="Registries" Type="Collection(Messages.MessageRegistry)">
+        </NavigationProperty>
+      </ComplexType>
+      <TypeDefinition Name="UUID" UnderlyingType="Edm.String"/>
+      <EntityContainer Name="ServiceContainer">
+        <Singleton Name="Service" Type="ServiceRoot.ServiceRoot"/>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

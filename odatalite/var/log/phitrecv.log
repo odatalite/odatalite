@@ -1,0 +1,11 @@
+GET /odata/$metadata HTTP/1.1
+OData-Version: 4.0
+Accept: application/json;odata.metadata=minimal
+Referer: http://10.30.56.119:12345/odata/webpage
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko
+Host: 10.30.56.119:12345
+DNT: 1
+Connection: Keep-Alive
+

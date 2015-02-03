@@ -1,0 +1,27 @@
+597,000,000
+242,617,304
+241,767,642
+233,667,418
+233,392,812
+234,243,140 (added OutStream)
+224,090,665 (added OutStream allocBuf)
+211,611,511 (direct serialization to PHIT_Context buffer)
+219,387,882 (added ODATA_Context_Clear)
+221,312,997
+179,291,792 (object caching)
+177,987,165 (built-in odata plugin)
+178,002,546 (added provider loading)
+172,729,653 PairConstructStringSpecial()
+173,902,716 ???
+172,877,914 (add nameLen to Special function)
+155,002,204 !ENABLE_INDENT
+172,838,315 ENABLE_INDENT
+172,404,359 ContextCache
+170,786,825 IsEscapeChar() loop unrolling
+169,911,924 Moved '(i + 1)' check out of the loop (when serializing pairs)
+191,189,985 (Unknown!)
+157,586,118 ALWAYS_INLINE macro
+156,543,006 more inlining (-Winline)
+154,618,124 always inline PairDestruct()
+154,117,584 PHIT_CHECK_CONTEXT()
+151,542,139 Inlining of OL_Object_GetString()

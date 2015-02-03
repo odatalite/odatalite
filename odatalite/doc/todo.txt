@@ -1,0 +1,81 @@
+
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+    (*) CSDL2C: Functions, Terms, EntityContainers, Annotations
+
+    (*) Handle actions (HTTP POST)
+
+    (*) Handle $ref (POST odata/People('jsmith')/Friends/$ref)
+
+    (*) HTTP OData-EntityId header
+
+    (*) HTTP ETag header
+
+    (*) HTTP Location header
+
+    BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+    (*) Handle odata/Gadget/1 style
+
+    (*) $expand query option
+
+    (*) Schema-based providers (schema generator)
+
+    (*) Deep insert
+
+    (*) HTTPS
+
+    (*) Events
+
+    (*) Improve thread safety
+
+    CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    (*) Client API
+
+    (*) pkgconfig usage
+
+    (*) Provider timed unload
+
+    (*) Out-of-process providers
+
+    (*) Property name validation
+
+    (*) Decimal type
+
+    (*) Geometry type
+
+    (*) HTTP digest authentication
+
+    (*) Syslog logging
+
+    (*) Support HTTP PUT
+
+    (*) Windows port
+
+    RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+
+    (*) Size-reduction
+
+    (*) Speed-optimization
+
+    (*) Documentation
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    (*) Prevent odata/Gadgets/Color
+
+    (*) Prevent odata/Gadgets(1)/$value
+
+    (*) Prevent odata/Gadgets/Color/$count
+
+    (*) Prevent odata/Gadgets?$count
+
+    (*) Prevent odata/Gadgets(1)/$count
+
+    (*) Fix $ref usage
+
+    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+    (X) Server-driven paging
+

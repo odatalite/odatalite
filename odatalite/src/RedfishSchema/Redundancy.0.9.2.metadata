@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OData"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/DMTFExtensions">
+    <edmx:Include Namespace="DMTFExtensions.0.9.2" Alias="DMTF"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://dmtf.org/schema/v1/Resource">
+    <edmx:Include Namespace="Resource.0.9.2" Alias="Resource"/>
+  </edmx:Reference>
+
+  <edmx:DataServices>
+
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Redundancy.0.9.2" Alias="Redundancy">
+
+      <ComplexType Name="Redundancy">
+        <Annotation Term="OData.Description" String="This is the redundancy definition to be used in other resource schemas."/>
+        <Annotation Term="OData.LongDescription" String="This object represents the Redundancy element property.  All values for resources described by this schema shall comply to the requirements as described in the SPMA specification.  The value of this string shall be of the format for the reserved word *Redundancy*"/>
+        <Property Name="Oem" Type="Resource.Oem" Nullable="false"/>
+        <Property Name="ActiveCorrelatableIDs" Type="Collection(Edm.String)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="Contains any CorrelatableIDs that represents components of this reduncancy set."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain CorrelattableIDs that are components of this redundancy set.  The correlatableID values can be JSON Pointers or UEFI identifiers, for example."/>
+          <Annotation Term="DMTF.Required"/>
+        </Property>
+        <Property Name="Name" Type="Edm.String" Nullable="false">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description"  String="The name of the resource or array element."/>
+          <Annotation Term="OData.LongDescription" String="This object represents the Name property.  All values for resources described by this schema shall comply to the requirements as described in the SPMA specification. The value of this string shall be of the format for the reserved word *Name*."/>
+          <Annotation Term="DMTF.Required"/>
+        </Property>
+        <Property Name="Mode" Type="Collection(Redundancy.RedundancyMode)">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the redundancy mode of the group."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the information about the redundancy mode of this manager.  Failover shall indicate a master/slave type arrangement where status indicates the role of this manager.  N+1 indicates an arrangement where the redundancy set needs MaxNumSupported-1 number of resources in order to be redundant.  Load Balanced indicates all members are active. However, there functionality is not independent of each other. Their functioning is determined by some sort of load balancing algorithm. Sparing is implied (i.e. each member can be a spare for the other(s). Sparing indicates that all members are active and are aware of each others. However, their functionality is independent until failover. Each member can be a spare for the other(s). Limited Sparing indicates that all members are active, and they may or may not be aware of each and they are not spares for each other."/>
+          <Annotation Term="DMTF.Required"/>
+        </Property>
+        <Property Name="MaxNumSupported" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the maximum number of members allowable for this particular managers redundancy, including this manager."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the maximum number of members allowed in the redundancy group."/>
+          <Annotation Term="DMTF.Required"/>
+        </Property>
+        <Property Name="MinNumNeeded" Type="Edm.Int64">
+          <Annotation Term="OData.Permissions" EnumMember="OData.Permissions/Read"/>
+          <Annotation Term="OData.Description" String="This is the minumum number of managers needed for this manager to be redundant."/>
+          <Annotation Term="OData.LongDescription" String="The value of this property shall contain the maximum number of members allowed in the redundancy group for the current redundancy mode to still be fault tolerant."/>
+          <Annotation Term="DMTF.Required"/>
+        </Property>
+        <Property Name="Status" Nullable="false" Type="Resource.Status">
+          <Annotation Term="DMTF.Required"/>
+        </Property>
+      </ComplexType>
+
+      <EnumType Name="RedundancyMode">
+        <Member Name="Failover">
+          <Annotation Term="OData.Description" String="Failure of the primary unit will cause a secondary unit to take over the functions of the primary unit"/>
+        </Member>
+        <Member Name="N+1">
+          <Annotation Term="OData.Description" String="Multiple units are available such that the system can continue normal operation if one unit fails"/>
+        </Member>
+        <Member Name="LoadBalanced">
+          <Annotation Term="OData.Description" String="Multiple units are available such that the system will continue operation at a reduced capacity if one unit fails"/>
+        </Member>
+        <Member Name="Sparing">
+          <Annotation Term="OData.Description" String="A spare unit is available to take over the function of a failed unit"/>
+        </Member>
+        <Member Name="LimitedSparing">
+          <Annotation Term="OData.Description" String="A spare unit is available to take over the function of a failed unit, but may require intervention to facilitate the transition"/>
+        </Member>
+      </EnumType>
+
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

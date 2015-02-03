@@ -1,0 +1,9 @@
+ PATCH serviceRoot/People('russellwhyte')
+ OData-Version: 4.0
+ Content-Type: application/json;odata.metadata=minimal
+ Accept: application/json
+
+ {
+ "@odata.type" : "Microsoft.OData.SampleService.Models.TripPin.Person",
+ "Emails" : ["Russell@example.com", "Russell@contoso.com",
+"newRussell@contoso.com"] }

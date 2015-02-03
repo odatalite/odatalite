@@ -1,0 +1,3 @@
+248,...,... Before Type Info
+156,...,... Using PostEntityTI()
+153,815,546 ODATA_FIELDTI_FLAG_NO_ESCAPES
